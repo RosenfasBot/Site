@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <h2>Caminhos:
+    <button type="button" name="button" class="btn btn-left btn-outline-secondary m-1 modalButton" data-form-url="{% url 'caminhos:create_caminho' %}">Criar Caminho
+    </button>
+  </h2>
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Tamanho</th>
+        <th scope="col">Ativo</th>
+        <th scope="col">CAs Ativos</th>
+        <th scope="col">Progresso</th>
+        <th scope="col" style="width: 150px;">Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for caminho in caminhos %}
+      <tr>
+        <td>{{ caminho.nome }}</td>
+        <td>{{ caminho.tamanho }}</td>
+        <td>{{ caminho.get_ativo_display }}</td>
+        <td>
+          {% if caminho.CA_ativo %}
+          {{ caminho.CA_ativo }}
+          {% else %}
+          Sem CA atribuído
+          {% endif %}
+        </td>
+        <td>{{ caminho.progresso }}</td>
+        <td style='text-align: center;'>
+          <button type="button" name="button" class="btn btn-primary modalButton btn-ctrl" data-form-url="{% url 'caminhos:detail_caminho' caminho.pk %}"><i class="fa fa-eye"></i></button>
+          <button type="button" name="button" class="btn btn-success modalButton btn-ctrl" data-form-url="{% url 'caminhos:update_caminho' caminho.pk %}"><i class="fa fa-edit"></i></button>
+          <button type="button" name="button" class="btn btn-danger modalButton btn-ctrl" data-form-url="{% url 'caminhos:delete_caminho' caminho.pk %}"><i class="fa fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script src="{% static 'js/excel-bootstrap-table-filter-bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/excel-bootstrap-table-filter-style.css' %}"/>
+<script>
+  // Use the plugin once the DOM has been loaded.
+  $(function () {
+    // Apply the plugin 
+    $('#table').excelTableFilter({captions: {a_to_z: 'A > Z', z_to_a: 'Z > A', search: 'Pesquisa', select_all: 'Selecionar todos'}});
+  });
+
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutationRecord) {
+      var open = false;
+      $('.dropdown-filter-content').each(function() {
+        if ($(this).css("display") == 'block') {
+          open = true;
+        }
+      });
+      if (open == true) {
+        $('.tabela').css( "overflow", "inherit" );
+      } else {
+        $('.tabela').css( "overflow", "auto" );
+      };
+      
+      console.log('style changed!'+observer.type);
+    });    
+  });
+var targets = document.getElementsByClassName("dropdown-filter-content");
+console.log(targets.length);
+for (var i = 0; i < targets.length; i++) {
+  observer.observe(targets.item(i), { attributes : true, attributeFilter : ['style'] });
+};
+});
+
+
+</script>
+
+<script type="text/javascript">
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% if pista.tipo_conteudo == 'Texto' %}
+{{ pista.conteudo_texto|linebreaks }}
+{% elif pista.tipo_conteudo == 'HTML' %}
+{{ pista.conteudo_texto|safe }}
+
+{% elif pista.tipo_conteudo == 'Imagem' %}
+{% if pista.conteudo_texto %}
+{{ pista.conteudo_texto|linebreaks }}
+<br>
+{% endif %}
+<img style='max-height: 150px;' src="{{pista.arquivo.url}}">
+
+{% elif pista.tipo_conteudo == 'Áudio' %}
+{% if pista.conteudo_texto %}
+{{ pista.conteudo_texto|linebreaks }}
+<br>
+{% endif %}
+<audio controls>
+  <source src="{{pista.arquivo.url}}" type="audio/ogg">
+Seu navegador não suporta áudio.
+</audio>
+
+{% elif pista.tipo_conteudo == 'Arquivo' %}
+{% if pista.conteudo_texto %}
+{{ pista.conteudo_texto|linebreaks }}
+  <br>
+{% endif %}
+  <a href="{{pista.arquivo.url}}" name="button" class="btn btn-custom btn-primary"><i class="fas fa-file"></i></a>
+<a href="{{pista.arquivo.url}}">{{pista.nome_arquivo}}</a>
+{% endif %}

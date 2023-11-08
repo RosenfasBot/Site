@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CA and user.userca.is_radio %}
+
+{% include "navbarCA.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container' style='margin-top: 1rem;'>
+  <div class="d-flex flex-column min-vh-80 justify-content-center align-items-center">
+    <div class='center-box'>
+      <h2 class="raleway-title">{{ resposta }}</h2>
+      <p class="help-block"> Senha tentada: {{ senha }}</p>
+      <br>
+      {{ context|safe }}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CA and user.userca.is_radio %}
+
+{% endif %}
+{% endblock %}

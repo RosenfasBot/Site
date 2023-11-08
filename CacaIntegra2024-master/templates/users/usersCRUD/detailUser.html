@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h5 class="modal-title">Detalhes do Usuário</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <div class="">
+    Usuário: {{ user.username }}
+  </div>
+  <div class="">
+    E-mail: {{ user.email }}
+  </div>
+  <div class="">
+    Último Login: {{ user.last_login|date:"d/m H:i" }}
+  </div>
+  <div class="">
+    Conta da CO: {% if user.is_CO is True %}<i class="fa fa-check"></i>{% elif user.is_CO is False %}<i
+    class="fa fa-times"></i>{% endif %}
+  </div>
+  <div class="">
+    Conta de CA: {% if user.is_CA is True %}<i class="fa fa-check"></i>{% elif user.is_CA is False %}<i
+    class="fa fa-times"></i>{% endif %}
+  </div>
+  {% if user.is_CA %}
+  <div class="">
+    Conta de Rádio: {{ user.userca.is_radio }}
+  </div>
+  <div class="">
+    Rádio: {{ user.userca.radio.user.username }}
+  </div>
+  {% endif %}
+</div>

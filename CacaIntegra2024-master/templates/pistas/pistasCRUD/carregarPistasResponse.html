@@ -1,0 +1,30 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    {% if erro %}
+    <h5 class="modal-title">Pistas não carregadas</h5>
+    {% elif not revisao %}
+    <h5 class="modal-title">Pistas carregadas com sucesso!</h5>
+    {% else %}
+    <h5 class="modal-title">Pistas carregadas, mas com possíveis revisões</h5>
+    {% endif %}
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>  
+  {% if revisao or erro %}
+  <div class="modal-form-fields">
+    <div class="form-group">
+      {% if erro %}
+      <p>{{ erro }}</p>
+      {% else %}
+      {% for r in revisao %}
+      <p>{{ r|safe }}</p>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  $('#modal').on('hide.bs.modal', function (e) {location.reload()})
+</script>

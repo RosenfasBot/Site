@@ -1,0 +1,83 @@
+<div class="modal-header">
+  <h5 class="modal-title">Detalhes da Pista</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <button type="button" name="button" class="btn btn-success btn-float" onclick="editButton()"><i class="fa fa-edit"></i>&nbsp;&nbsp;Editar</button>
+  <div class="">
+    <b>Número: </b>{{ pista.numero }}
+  </div>
+  <div class="">
+    <b>Tipo de conteúdo: </b>{{ pista.get_tipo_conteudo_display }}
+  </div>
+  <div class="">
+    <b>Autor: </b>{{ pista.autor }}
+  </div>
+  <br>
+  <div class="">
+    <b>Macro: </b>{{ pista.macro }}
+  </div>
+  <div class="">
+    <b>Micro: </b>{{ pista.micro }}
+  </div>
+  <div class="">
+    <b>Solucão: </b>{{ pista.solucao }}
+  </div>
+  {% if pista.observacao %}
+  <div class="">
+    <b>Obs: </b>{{ pista.observacao }}
+  </div>
+  {% endif %}
+  <hr>
+  <div class="">
+    <b>Status: </b>{{pista.get_status_display }}
+  </div>
+  <div class="">
+    <b>Senha: </b>{{pista.senha.valor|default:"Não definido"}}
+  </div>
+  <div class="">
+    <b>Caminho: </b>{{ pista.caminho|default:"Não definido" }}
+  </div>
+  {% if pista.hora_inicio %}
+  <div class="">
+    <b>Hora Início:</b> {{ pista.hora_inicio|date:"d/m H:i:s" }}
+  </div>
+  {% endif %}
+  {% if pista.hora_recolhida %}
+  <div class="">
+    <b>Hora recolhida:</b> {{ pista.hora_recolhida|date:"d/m H:i:s" }}
+  </div>
+  {% endif %}
+  <hr>
+  <div class="">
+    <b>Caminhos possíveis:</b> {{ pista.caminhos_possiveis.all|join:", " }}
+  </div>
+  <div class="">
+    <b>Usuários possíveis:</b> {{ pista.usuarios_possiveis.all|join:", " }}
+  </div>
+  <hr>
+  <div class="pista-body">
+    {% include "pistas/viewConteudoPista.html" %}
+  </div>
+  <hr>
+  <h5>Logs:</h5>
+  <table class="table table-bordered" id="table">
+    <tbody>
+      {% for log in pista.logs.all %}
+      <tr>
+        <td class="ts-field">{{ log.timestamp|date:"d/m/y H:i:s" }}</td>
+        <td>{{ log.user }}</td>
+        <td>{{ log.texto }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+function editButton(){
+  $.get( "{% url 'pistas:update_pista' pista.id %}", function( data )  {
+    $(".modal-content").html(data);
+  });
+};
+</script>

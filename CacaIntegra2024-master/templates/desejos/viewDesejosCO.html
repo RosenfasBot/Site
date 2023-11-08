@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <h2>Desejos:
+    <button type="button" name="button"
+            class="btn btn-left btn-outline-secondary modalButton" data-form-url="{% url 'desejos:create_desejo' %}">
+      Criar Desejo
+    </button>
+  </h2>
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+      <tr>
+        <th scope="col">Texto</th>
+        <th scope="col" style="width:100px;">Data Início</th>
+        <th scope="col" style="width:100px;">Data Fim</th>
+        <th scope="col" style="width:80px;">Pontos</th>
+        <th scope="col" style="width:80px;">Notificado</th>
+        <th scope="col" style="width:105px;">Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for desejo in desejos %}
+      <tr>
+        <td>{{ desejo.texto }}</td>
+        <td>{{ desejo.start_time|date:"d/m H:i" }}</td>
+        <td>{{ desejo.end_time|date:"d/m H:i" }}</td>
+        <td>{{ desejo.pontos }}</td>
+        <td>{{ desejo.notificado }}</td>
+        <td style='text-align: center;'>
+          <button type="button" name="button" class="btn btn-success modalButton btn-ctrl"
+                  data-form-url="{% url 'desejos:update_desejo' desejo.pk %}"><i class="fa fa-edit"></i></button>
+          <button type="button" name="button" class="btn btn-danger modalButton btn-ctrl"
+                  data-form-url="{% url 'desejos:delete_desejo' desejo.pk %}"><i class="fa fa-trash-alt"></i></button>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script src="{% static 'js/excel-bootstrap-table-filter-bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/excel-bootstrap-table-filter-style.css' %}"/>
+<script>
+  // Use the plugin once the DOM has been loaded.
+  $(function () {
+    // Apply the plugin
+    $('#table').excelTableFilter({captions: {a_to_z: 'A > Z', z_to_a: 'Z > A', search: 'Pesquisa', select_all: 'Selecionar todos'}});
+  });
+
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutationRecord) {
+        var open = false;
+        $('.dropdown-filter-content').each(function() {
+          if ($(this).css("display") == 'block') {
+            open = true;
+          }
+        });
+        if (open == true) {
+          $('.tabela').css( "overflow", "inherit" );
+        } else {
+          $('.tabela').css( "overflow", "auto" );
+        };
+        });    
+    });
+  var targets = document.getElementsByClassName("dropdown-filter-content");
+  console.log(targets.length);
+  for (var i = 0; i < targets.length; i++) {
+    observer.observe(targets.item(i), { attributes : true, attributeFilter : ['style'] });
+  };
+  });
+
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<form method="post" class="modal-form" action="">
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h5 class="modal-title">Deletar desejo</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+  <div class="modal-body">
+    <p>Você tem certeza que quer apagar o desejo
+      <strong>{{ desejo.texto }}</strong>?</p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-danger">Deletar</button>
+  </div>
+
+</form>

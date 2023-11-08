@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <h2>Senhas:
+    {% if senhas %}
+    <button  type="button" name="button" class="btn btn-left btn-outline-secondary m-1 modalButton" data-form-url="{% url 'pistas:todas_senhas' %}">
+      Exportar
+    </button>
+    {% endif %}
+    <button  type="button" name="button" class="btn btn-left btn-outline-secondary m-1 modalButton" data-form-url="{% url 'pistas:carregar_senhas' %}">
+      Gerar Senhas
+    </button>
+    {% if senhas %}
+    <button  type="button" name="button" class="btn btn-left btn-outline-secondary m-1" onclick="deletar_senhas()" {% if gerencial.caca_start %}disabled{% endif %}>
+      Apagar todas Senhas
+    </button>
+    {% endif %}
+  </h2>
+  <div class="tabela">
+    <table class="table table-bordered" style='display: none;' id="table">
+      <thead>
+      <tr>
+        <th scope="col">Senha</th>
+        <th scope="col">Válida</th>
+        <th scope="col">Queimada</th>
+        <th scope="col" style="width: 55px;">Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for senha in senhas %}
+      <tr style='background-color:{% if not senha.valida %}indianred; {% elif senha.queimada %}darkgray; color:gray;{% endif %}'>
+        <td class="senha">{{ senha.valor }}</td>
+        <td>{% if senha.valida is True %}<i class="fa fa-check"></i>{% elif senha.valida is False %}<i
+          class="fa fa-times"></i>{% endif %}</td>
+        <td>{% if senha.queimada is True %}<i class="fa fa-check"></i>{% elif senha.queimada is False %}<i
+          class="fa fa-times"></i>{% endif %}</td>
+        <td style='text-align: center;'>
+          {% if not senha.queimada and senha.valida %}
+          <button type="button" name="button" class="btn btn-danger btn-ctrl"
+                  onclick="queimaSenha('{{ senha.valor }}')"><i class="fa fa-fire"></i></button>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script src="{% static 'js/excel-bootstrap-table-filter-bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/excel-bootstrap-table-filter-style.css' %}"/>
+<script>
+  // Use the plugin once the DOM has been loaded.
+  $(function () {
+    // Apply the plugin 
+    $('#table').excelTableFilter({captions: {a_to_z: 'A > Z', z_to_a: 'Z > A', search: 'Pesquisa', select_all: 'Selecionar todos'}});
+  });
+  $( document ).ready(function() {
+    $('#table').css("display", 'table');
+});
+
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutationRecord) {
+      var open = false;
+      $('.dropdown-filter-content').each(function() {
+        if ($(this).css("display") == 'block') {
+          open = true;
+        }
+      });
+      if (open == true) {
+        $('.tabela').css( "overflow", "inherit" );
+      } else {
+        $('.tabela').css( "overflow", "auto" );
+      };
+      
+      console.log('style changed!'+observer.type);
+    });    
+  });
+var targets = document.getElementsByClassName("dropdown-filter-content");
+console.log(targets.length);
+for (var i = 0; i < targets.length; i++) {
+  observer.observe(targets.item(i), { attributes : true, attributeFilter : ['style'] });
+};
+});
+
+
+</script>
+
+<script type="text/javascript">
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  function queimaSenha(valor) {
+    $.ajax({
+      type:"post",
+      url:"{% url 'pistas:queimaSenha' %}",
+      data: {
+        valor: valor,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (html) {
+        location.reload();
+      }
+    });
+  };
+  function deletar_senhas() {
+  if(confirm('Tem certeza que deseja deletar todas senhas?')) {
+  $.get( "{% url 'pistas:deletar_senhas' %}", function( data ) {location.reload()});
+}
+};
+</script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endif %}
+{% endblock %}

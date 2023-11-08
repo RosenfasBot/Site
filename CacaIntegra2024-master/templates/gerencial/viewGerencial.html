@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/mainCO.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class ='container mt-3'>
+  <h2>Gerencial:<button  onclick="startCaca()" type="button" name="button" class="btn btn-left btn-outline-secondary">{% if not gerencial.caca_start %}Começar Caça{% else %}Fechar Caça{% endif %}</button></h2>   
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th scope="col">Caça Iniciado</th>
+          <th scope="col">Tempos de Dica</th>
+          <th scope="col">Timeout Extravio</th>
+          <th scope="col">Timeout Typo</th>
+          <th scope="col">Timeout Merda</th>
+          <th scope="col">Timeout Pré-Caça</th>
+          <th scope="col">Telegram Token</th>
+          <th scope="col">Telegram Group</th>
+          <th scope="col" style="width: 50px;">Ações</th>
+       </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{% if gerencial.caca_start is True %}<i class="fa fa-check"></i>{% elif gerencial.caca_start is False %}<i
+            class="fa fa-times"></i>{% endif %}</td>
+          <td>{{ gerencial.tempos_dica }}</td>
+          <td>{{ gerencial.timeout_extravio }}</td>
+          <td>{{ gerencial.timeout_typo }}</td>
+          <td>{{ gerencial.timeout_merda }}</td>
+          <td>{{ gerencial.timeout_precaca }}</td>
+          <td>{{ gerencial.telegram_bottoken|truncatechars:6 }}</td>
+          <td>{{ gerencial.telegram_group }}</td>
+          <td style='text-align: center;'>
+            <button type="button" name="button" class="btn btn-success modalbutton btn-ctrl" data-form-url="{% url 'gerencial:update_gerencial' gerencial.pk %}"><i class="fas fa-edit"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+
+<div class ='container mt-3'>
+  <h2>LockDown:<button type="button" name="button" class="btn btn-left btn-outline-secondary modalButton" data-form-url="{% url 'gerencial:create_lock' %}">Travar Site</button></h2>   
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Data de início</th>
+          <th scope="col">Data de Fim</th>
+          <th scope="col" style="width: 120px;">Ações</th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for lock in locks %}
+        <tr>
+          <td>{{ lock.get_lock_type_display }}</td>
+          <td>{{ lock.start_time }}</td>
+          <td>{{ lock.end_time }}</td>
+          <td style='text-align: center;'>
+            <button type="button" name="button" class="btn btn-success modalbutton btn-ctrl" data-form-url="{% url 'gerencial:update_lock' lock.pk %}"><i class="fas fa-edit"></i></button>
+            <button type="button" name="button" class="btn btn-danger modalbutton btn-ctrl" data-form-url="{% url 'gerencial:delete_lock' lock.pk %}"><i class="far fa-trash-alt"></i></button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+<div class ='container mt-3 mb-5'>
+  <h2>Timeouts:<button type="button" name="button" class="btn btn-left btn-outline-secondary modalButton" data-form-url="{% url 'gerencial:createTimeout' %}">Aplicar Timeout</button></h2>    
+<div class="tabela">
+  <table class="table table-bordered" id="table">
+    <thead>
+      <tr>
+        <th scope="col">Usuário</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Timeout Pistas</th>
+        <th scope="col">Timeout Artefato</th>
+        <th scope="col" style="width: 230px;">Ações</th>
+     </tr>
+    </thead>
+    <tbody>
+      {% for ca in cas %}
+      <tr>
+        <td>{{ ca }}</td>
+        <td>{{ ca.user.email }}</td>
+        <td>{% if ca.timeout_until > now %} {{ ca.timeout_until|date:"d/m/y H:i:s" }} {% endif %}</td>
+        <td>{% if ca.timeout_artefato > now %} {{ ca.timeout_artefato|date:"d/m/y H:i:s" }} {% endif %}</td>
+        <td style='text-align: center;'>
+          <button type="button" name="button" class="btn btn-primary" onclick="resetTimeout('timeout_until', '{{ ca.user.username }}')" style="display: inline-flex;justify-content: space-evenly;align-items: center;"><i class="far fa-clock"></i>&nbsp;Pista</button>
+          <button type="button" name="button" class="btn btn-success" onclick="resetTimeout('timeout_artefato', '{{ ca.user.username }}')" style="display: inline-flex;justify-content: space-evenly;align-items: center;"><i class="far fa-clock"></i>&nbsp;Artefato</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>  
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script type="text/javascript">
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  function resetTimeout(tipo, ca) {
+    $.ajax({
+      type:"post",
+      url:"{% url 'gerencial:editTimeout' %}",
+      data: {
+        ca: ca,
+        timeout: tipo,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (html) {
+        location.reload();
+      }
+    });
+
+  };
+</script>
+
+<script type="text/javascript">
+  function startCaca() {
+    if(confirm('Tem certeza que quer alterar o status do caça?')) {
+     $.ajax({
+            type:"get",
+            url:"{% url 'gerencial:startCaca' %}",
+            success: function (html) 
+            {
+              location.reload();
+            }
+      });
+    }
+    };
+</script>
+{% endif %}
+{% endblock %}

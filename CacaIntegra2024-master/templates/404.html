@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<style>
+  @font-face {
+    font-family: 'Numbers';
+    src: url('https://fonts.googleapis.com/css2?family=Raleway&display=swap') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .number-font {
+    font-family: 'Numbers';
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+  <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class='center-box m-5 p-5'>
+      <div class="row justify-content-center">
+        <a class="mb-4" href="{% url 'paginaInicial' %}">
+          <img src="{% static 'images/logo-horizontal.png' %}" alt="logo" class="logo">
+        </a>
+        <h2>Erro 404</h2>
+        <br>
+        <p>Esta página não foi encontrada:</p>
+        <br>
+        <p id='URL_notfound'></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+  document.getElementById("URL_notfound").innerHTML =
+    "<a style='font-size:18px; font-weight:600; color:#d0d0d0; overflow-wrap: anywhere;' href=" + window.location.href + ">" + window.location.href + "</a>";
+
+  
+</script>
+
+{% endblock js %}

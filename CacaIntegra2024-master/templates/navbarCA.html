@@ -1,0 +1,42 @@
+{% load static %}
+<div class="nav-container" style="background-color: black;">
+  <div class="container">
+    <header class="blog-header py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 text-center">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">&#9776;</span>
+          </button>
+        </div>
+        <div class="col-4 text-center">
+          <a class="navbar-brand" href="{% url 'paginaInicial' %}">
+            <img src="{% static 'images/logo-horizontal.png' %}" alt="logo"
+                 style='margin-left: -20%; margin-right: -20%;' class="logo">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Log Out</a>
+        </div>
+      </div>
+    </header>
+
+
+    <nav class="nav navbar navbar-expand-md px-4 py-0 mb-2 justify-content-around ">
+      <div class="collapse navbar-collapse" id='navbar'>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100">
+          <li class="nav-item"><a class="p-2 hormenu nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+          {% if request.user.userca.is_radio %}
+          <li class="nav-item"><a class="p-2 hormenu nav-link" href="{% url 'fila:validar_pista' %}">
+            Validar Senha
+          </a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+  <div class='{{ user.userca.ca_short }} ca-identifier d-flex justify-content-center'>
+    {{ user }}
+  </div>
+</div>

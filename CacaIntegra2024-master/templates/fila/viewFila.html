@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+.ghost {
+  opacity: 0.4;
+}
+.seta:hover{
+  color:white!important;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <h2>Fila:
+    <button onclick="editar_fila()" type="button" name="button" id='btn-edicao' class="btn btn-left btn-outline-secondary m-1">
+      Editar fila
+    </button>
+    <button onclick="fila_aletoria()" type="button" name="button" id='btn-aleatorio' class="btn btn-left btn-outline-secondary m-1" {% if gerencial.caca_start %}disabled{% endif %}>
+      Randomizar fila
+    </button>
+  </h2>
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+      <tr>
+        <th scope="col" style="width:80px;">Ordem</th>
+        <th scope="col" style="width:80px;">Número</th>
+        <th scope="col" style="width:120px;">Status</th>
+        <th scope="col">Conteúdo</th>
+        <th scope="col">Caminho</th>
+        <th scope="col" class='acoes' style="width:150px;">Ações</th>
+      </tr>
+      </thead>
+      <tbody id='tbody'>
+      {% for pista in pistas %}
+      <tr data-id="{{ pista.numero }}">
+        <td>{{ forloop.counter }}</td>
+        <td>{{ pista.numero }}</td>
+        <td>{{ pista.get_status_display }}</td>
+        <td>{% include "pistas/viewConteudoPista.html" %}</td>
+        <td>{{ pista.caminho|default:'Não definido' }}</td> 
+        <td style='text-align: center;'>
+          <button type="button" name="button" class="btn btn-primary modalButton btn-ctrl" 
+                  data-form-url="{% url 'pistas:detail_pista' pista.id %}?next={{request.path}}"><i class="fa fa-eye"></i></button>
+          <button type="button" name="button" class="btn btn-success modalButton btn-ctrl" 
+                  data-form-url="{% url 'pistas:update_pista' pista.id %}?next={{request.path}}"><i class="fa fa-edit"></i></button>
+          <button type="button" name="button" class="btn btn-danger modalButton btn-ctrl" 
+                  data-form-url="{% url 'pistas:delete_pista' pista.id %}?next={{request.path}}"><i class="fa fa-trash"></i></button>
+          <button type="button" name="button" class="btn btn-warning btn-ctrl seta" hidden><i class="fa-solid fa-arrows-up-down"></i></button>
+            
+          </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script src="{% static 'js/excel-bootstrap-table-filter-bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/excel-bootstrap-table-filter-style.css' %}"/>
+<script>
+  // Use the plugin once the DOM has been loaded.
+  $(function () {
+    // Apply the plugin 
+    $('#table').excelTableFilter({captions: {a_to_z: 'A > Z', z_to_a: 'Z > A', search: 'Pesquisa', select_all: 'Selecionar todos'}});
+  });
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutationRecord) {
+        var open = false;
+        $('.dropdown-filter-content').each(function() {
+          if ($(this).css("display") == 'block') {
+            open = true;
+          }
+        });
+        if (open == true) {
+          $('.tabela').css( "overflow", "inherit" );
+        } else {
+          $('.tabela').css( "overflow", "auto" );
+        };
+        
+        console.log('style changed!'+observer.type);
+      });    
+    });
+  var targets = document.getElementsByClassName("dropdown-filter-content");
+  console.log(targets.length);
+  for (var i = 0; i < targets.length; i++) {
+    observer.observe(targets.item(i), { attributes : true, attributeFilter : ['style'] });
+  };
+  });
+
+
+
+</script>
+
+<script type="text/javascript">
+function fila_aletoria() {
+  if(confirm('Tem certeza que quer reordenar a fila?')) {
+    $.get( "{% url 'fila:fila_aletoria' %}", function( data ) {    location.reload(); });
+  }
+};
+
+
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js" integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+
+<script type="text/javascript">
+
+$('#tbody').sortable({
+      group: 'list',
+      animation: 200,
+      handle: '.seta',
+      ghostClass: 'ghost',
+      dataIdAttr: 'data-id',
+  });
+var original_order = $('#tbody').sortable('toArray');
+
+
+function editar_fila() {
+  document.querySelectorAll('.modalButton').forEach(el=>el.hidden = true);
+  document.querySelectorAll('.seta').forEach(el=>el.hidden = false);
+  document.querySelector('#btn-edicao').innerHTML = "Terminar edição";
+  document.querySelector('#btn-edicao').onclick = termina_edicao;
+  document.querySelector('#btn-aleatorio').hidden = true;
+  document.querySelectorAll('.acoes').forEach(el=>el.style.width = '50px');    
+};
+
+function termina_edicao() {
+  var actual_order = $('#tbody').sortable('toArray');
+  if (actual_order.toString() != original_order.toString()){
+    console.log('dif');
+    console.log(actual_order, original_order);
+    if(confirm('Tem certeza que quer alterar a ordem da fila?')) {
+     $.ajax({
+        type:"post",
+        url:"{% url 'fila:alterarFila' %}",
+        data:{fila:actual_order.toString(),
+             csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function (html) 
+        {
+          location.reload();
+        }
+      });
+    }
+  }
+
+
+  document.querySelectorAll('.modalButton').forEach(el=>el.hidden = false);
+  document.querySelectorAll('.seta').forEach(el=>el.hidden = true);
+  document.querySelector('#btn-edicao').innerHTML = "Editar fila";
+  document.querySelector('#btn-edicao').onclick = editar_fila;
+  document.querySelector('#btn-aleatorio').hidden = false;
+  document.querySelectorAll('.acoes').forEach(el=>el.style.width = '150px');
+  
+}
+</script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endif %}
+{% endblock %}

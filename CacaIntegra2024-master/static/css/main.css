@@ -1,0 +1,482 @@
+body{
+    color: whitesmoke;
+    font-family: 'Open Sans';
+    background-color: #1f1f1f;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+h2{
+    margin:0;
+}
+
+.login-form input {
+    width: 100%;
+}
+
+.blog-header {
+    line-height: 1;
+    border-bottom: 1px solid #242424;
+}
+
+.blog-header-logo {
+font-size: 2.25rem;
+}
+
+.blog-header-logo:hover {
+text-decoration: none;
+}
+
+.hormenu{
+    color: whitesmoke !important;
+    text-decoration: none;
+}
+
+.dropdown-menu{
+    background-color: black;
+    color: whitesmoke;
+}
+
+.diary-content{
+    text-indent: 30px;
+    text-align: justify;
+}
+
+.character-content{
+    font-size: 14px;
+    text-align: justify;
+    margin:0;
+}
+
+.diary-sign{
+    float: right;
+}
+
+.dropdown-item{
+    color: whitesmoke;
+}
+.dropdown-item:active{
+    background-color: gray;
+}
+
+.form-input{
+    position: relative;
+}
+
+a {
+    color:#6c757d;
+}
+a:hover{
+    color: #494c4e;
+}
+
+#switchCamera{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    color: white;
+    border: 0;
+    font-size: 20px;
+}
+
+.login-form .form-group input{
+        background: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8) !important;
+        padding: 0.25rem;
+        padding-left: 2rem;
+        border-radius: 2px;
+        border: none;
+        border-bottom: 1px solid #6c757d;
+}
+
+.form-group .icon {
+    position: absolute;
+    margin-left: 10px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: transparent;
+}
+
+
+.hormenu:hover{
+    font-weight:700;
+    color: rgb(141, 141, 141);
+    
+}
+
+.nav-container {
+    position: sticky;
+    top: 0;
+    z-index:100;
+}
+  
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-scroller .nav-link {
+padding-top: .75rem;
+padding-bottom: .75rem;
+font-size: .875rem;
+}
+
+.btn{
+    color: whitesmoke;
+}
+.btn:focus{
+    box-shadow: 0 0 0 0.25rem rgb(255 255 255 / 25%);
+}
+
+
+.btn-ctrl{
+    width: 40px;
+}
+
+.btn-ctrl i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabela{
+    background-color: whitesmoke;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    margin-top: 1rem;
+}
+
+.tabela-small{
+    background-color: whitesmoke;
+    height: 270px;
+    font-size: 0.7rem;
+    display: block;
+    overflow: auto;
+    margin-top: 1rem;
+}
+
+.center-box{
+    border-radius: 5px;
+    text-align: center;
+    max-width: 600px;
+    min-width: 350px;
+    
+    padding: 2rem;
+    background-color: black;
+    box-shadow: 0px 0px 11px 3px#1e1e1e;
+}
+.white{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.btn-custom{
+    font-weight: 500;
+}
+.btn-custom:hover{
+    color: white;
+    font-weight: 600;
+}
+
+.form-fields{
+    margin: 1rem 0;
+}
+
+.g-recaptcha{
+    margin-bottom:1rem ;
+}
+.pista-body{
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+
+.tabela-small td{
+    padding: 0.25rem;
+}
+
+.table{
+    margin: 0px;
+}
+
+.btn-float{
+    position: absolute;
+    right: 1rem;
+}
+
+th{
+    white-space: nowrap;
+    word-wrap: break-word;
+    max-width: 700px;
+}
+td{
+    word-wrap: break-word;
+    max-width: 700px;
+}
+
+.modal{
+    color: black;
+}
+.modal-form{
+    margin: 0px;
+}
+
+.senha{
+    font-family: Consolas,"courier new";
+}
+
+#id_senha{
+    font-family: Consolas,"courier new";
+}
+
+.container:last-of-type{
+    margin-bottom: 1rem;
+}
+
+.card-text{
+    transform: translateY(100%);
+}
+
+.btn-left{
+    float: right;
+    background-color: black;
+}
+
+.modal-form-fields{
+    margin: 0.75rem 1rem;
+}
+
+.form-group:not(:first-child){
+    margin-top: 0.5rem;
+}
+
+.ts-field{
+    width: 155px;
+}
+
+.ts-field-sm{
+    width: 100px;
+}
+
+.help-block{
+    margin: 0px;
+}
+
+.navbar-collapse{
+    max-width: 800px;
+}
+
+.navbar-toggler{
+    display: none;
+}
+.navbar-toggler-main{
+    display: none;
+}
+
+.navbar-brand{
+    margin-right: 2rem;
+    text-decoration: none;
+    white-space: nowrap;
+    color: whitesmoke;
+}
+
+.navbar-brand:hover{
+    color: whitesmoke;
+}
+
+.nav-link:focus{
+    color: white;
+}
+.divisor{
+    border-left: 2px solid #ffffff;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    margin-bottom: 1rem;
+    background-color: transparent;
+    width: 320px;
+    height: 320px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+  
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+  
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+ 
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+  
+
+.CAM{
+    font-weight: 1000;
+    color: white;
+    background-color: #F94343 !important;
+}
+.CEE{
+    font-weight: 1000;
+    color: white;
+    background-color: #344c99 !important;
+}
+.CEC{
+    font-weight: 1000;
+    color: black;
+    background-color: #EEDF53 !important;
+}
+.CAEP{
+    font-weight: 1000;
+    color: white;
+    background-color: #56C275 !important;
+}
+.AEQ{
+    font-weight: 1000;
+    color: white;
+    background-color: #4586ac !important;
+}
+.CEN{
+    font-weight: 1000;
+    color: white;
+    background-color: #000000 !important;
+}
+.CMR{
+    font-weight: 1000;
+    color: black;
+    background-color: #F47D34 !important;
+}
+.CAEA{
+    font-weight: 1000;
+    color: white;
+    background-color: #935BBE !important;
+}
+
+.ca-identifier{
+    font-size: 1.7rem;
+    text-align: center;
+    height: 3rem;
+    padding: 0.5rem;
+    align-items: center;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+
+
+
+@media (max-width: 991px) {
+    .navbar-toggler{
+        display: block;
+        float: left;
+        border-color: #6c757d;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+        border-radius: 0.2rem;
+    }
+    .navbar-toggler-main{
+        display: block;
+        float: right;
+        border-color: #6c757d;
+        color: white;
+        background-color: transparent;
+        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+        border-radius: 0.2rem;
+    }
+ 
+    .navbar-toggler-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .navbar-toggler:focus {
+        text-decoration: none;
+        outline: 0;
+        box-shadow: 0 0 0 0.05rem;
+    }
+    .navbar-toggler-main:focus {
+        text-decoration: none;
+        outline: 0;
+        box-shadow: 0 0 0 0.05rem;
+    }
+}
+.tabela {
+    overflow: auto;
+}
+.logo{
+    max-height: 50px;
+}
+.logo-grande{
+    max-height: 700px;
+    margin-left: -20%;
+    margin-right: -20%;
+}
+
+
+.justificado {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand{
+        margin-right: 0;
+    }
+    .logo{
+        max-height: 45px;
+    }
+    .ts-field{
+        width: 70px;
+    }
+    .center-box{
+        width: 100%;
+        margin: auto;
+        max-width: 100%;
+    }
+    .container .min-vh-100{
+        min-height: 0 !important;
+        margin-top: 1rem;
+    }
+    .flip-card{
+        margin-bottom: 1rem;
+    }
+}

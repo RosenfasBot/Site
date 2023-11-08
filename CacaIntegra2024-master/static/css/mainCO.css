@@ -1,0 +1,87 @@
+#table-caminhos{
+    text-align: center;
+    background-color: rgb(230, 230, 230);
+}
+
+.table{
+    font-size: 14px;
+}
+
+.table-caminho-header{
+    font-weight: 1000;
+    font-size: 12px;
+}
+.table-caminho-cas{
+    font-weight: 1000;
+}
+
+.table-caminho-pista{
+    background-color: white !important;
+}
+
+
+.table-caminho-pista:hover {
+    filter: brightness(70%) !important;
+}
+
+.pista-plantada{
+    background-color: lightblue !important;
+}
+.pista-extraviada{
+    background-color: lightcoral !important;
+}
+.pista-recolhida{
+    background-color: lightgreen !important;
+}
+.grav-0{
+    background-color:  #dc3545!important;
+}
+.grav-1{
+    background-color: #ffc107 !important;
+}
+
+
+
+.cortado{
+    filter: brightness(90%);
+    color: rgb(209, 209, 209);
+}
+
+.pistassa-card{
+    background-color: whitesmoke;
+    color: black;
+    display: block;
+    margin-top: 1rem;
+    border-radius: 10px;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.btn-pistassa{
+    margin: 0 5px;
+    color: black;
+    border-color: #6c757d;
+}
+
+.btn-pistassa:hover{
+    background-color: #aaa;
+    font-weight: 600;
+}
+
+
+.btn-pistassa.active{
+    color: white;
+    border-color: transparent;
+    background-color: #c18c41;
+    font-weight: 500;
+}
+
+.btn-pistassa.active:hover{
+    background-color: #9e6e2a;
+    color: white;
+    font-weight: 600;
+}
+
+.form{
+    margin: 0px;
+}

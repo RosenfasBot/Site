@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h5 class="modal-title">Detalhes do Artefato</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <div class="">
+    Nome: {{ artefato.nome }}
+  </div>
+  <div class="">
+    Raridade: {{ artefato.get_raridade_display }}
+  </div>
+  <div class="">
+    Trivia: {{ artefato.trivia }}
+  </div>
+  <div class="">
+    Gaba: {{ artefato.gaba }}
+  </div>
+  <div class="">
+    Hora Ativo: {{ artefato.hora_ativo | date:"d/m H:i" }}
+  </div>
+  <div class="">
+    CA que recuperou: {{ artefato.CA_dono }}
+  </div>
+  <div class="">
+    Usado: {{ artefato.usado }}
+  </div>
+</div>

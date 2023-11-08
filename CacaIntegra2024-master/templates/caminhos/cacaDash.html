@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/mainCO.css' %}">
+<meta http-equiv="refresh" content="240">
+
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+
+<div class ='container'>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <div class="tabela-small">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="ts-field-sm" scope="col">TimeStamp</th>
+              <th scope="col">Nº Pista</th>
+              <th scope="col">Acontecimento</th>
+              <th scope="col">Usuário</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for log in allPistaLogs %}
+            <tr>
+              <td>{{ log.timestamp|date:"d/m/y H:i:s" }}</td>
+              <td>{{ log.pista }}</td>
+              <td>{{ log.texto }}</td>
+              <td>{{ log.user }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <div class="tabela-small">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Pista</th>
+              <th scope="col">Ação</th>
+              <th scope="col">Equipe</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for al in alerta|dictsortreversed:"gravidade"  %}
+            <tr class="{% if al.gravidade == 2 %} bg-danger {% elif al.gravidade == 1 %} bg-warning {% endif %}">
+              <td>{{ al.numero }}</td>
+              <td>{{ al.tipo }}</td>
+              <td>{{ al.equipe|default:"Não definido" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class ='container'>
+  <h2 style='margin-top: 0.5rem;'>Pistas Vivas:</h2>
+    
+  <div class="tabela" style='margin-top: 0.5rem; margin-bottom: 0.5rem;'>
+    <table class="table table-bordered">
+      <tbody>
+        {% for caminho in caminhos %}
+        {% if caminho.ativo and caminho.pista_viva %}
+        <tr>
+          <td class='table-caminho-header' style="width: 150px;">{{ caminho.nome }}</td>
+          {% if caminho.CA_ativo %} 
+          <td class='table-caminho-cas {{ caminho.CA_ativo.ca_short }} {{ caminho.get_ativo_display }}' style="width: 150px;">
+            {{ caminho.CA_ativo.ca_short }}
+            </td>
+            {% else %}
+              <td class='table-caminho-cas {{ caminho.get_ativo_display }}'>
+                Todos
+              </td>
+            {% endif %}
+            {% with pista=caminho.pista_viva %} 
+            <td class='table-caminho-pista updatepista' data-form-url="{% url 'pistas:detail_pista' pista.pk %}?next={{request.path}}">{% include "pistas/viewConteudoPista.html" %}</td>
+            {% endwith %}
+          </tr>
+
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>  
+</div>
+<div class ='container'>
+  <h2 style='margin-top: 0.5rem;'>Caminhos:<button  onclick="hideCortados()" type="button" name="button" class="btn btn-left btn-outline-secondary hidecut">Esconder cortados</button></h2>   
+    
+  <div class="tabela" style='margin-top: 0.5rem; margin-bottom: 0.5rem;'>
+    <table class="table table-bordered" id="table-caminhos">
+      <tbody>
+        {% for caminho in caminhos %}
+        <tr>
+          <td class='table-caminho-header {{ caminho.get_ativo_display }}'>{{ caminho.nome }}</td>
+          {% if caminho.CA_ativo %}
+          <td class='table-caminho-cas {{ caminho.CA_ativo.ca_short }} {{ caminho.get_ativo_display }}'>
+            {{ caminho.CA_ativo.ca_short }}
+            </td>
+          {% else %}
+            <td class='table-caminho-cas {{ caminho.get_ativo_display }}'>
+              Todos
+            </td>
+          {% endif %}
+          {% for pista in caminho.pistas.all %}
+            <td class='table-caminho-pista pista-{{ pista.status }} updatepista {{ caminho.get_ativo_display }} ' data-form-url="{% url 'pistas:detail_pista' pista.pk %}?next={{request.path}}">
+              {{ pista|default:"N.A." }}
+            </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>  
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script type="text/javascript">
+$("#table-caminhos").each(function () {
+  var $this = $(this);
+  var maxCell = 0;
+  $this.find("tr").each(function () {
+    var i = $(this).children('td').length;
+    if (i > maxCell){
+      maxCell = i;
+    }; 
+  });
+  $this.find("tr").each(function () {
+    var i = $(this).children('td').length;
+    for (a = 0; a < maxCell-i; a++){
+      $(this).append('<td>&nbsp;</td>');
+    }; 
+  });
+});
+
+$("#table-caminhos").each(function () {
+  var $this = $(this);
+  var newrows = [];
+    $this.find("tr").each(function () {
+      var i = 0;
+      $(this).find("td,th").each(function () {
+          i++;
+          if (newrows[i] === undefined) {
+              newrows[i] = $("<tr></tr>");
+          }
+          newrows[i].append($(this));
+    });
+  });
+  $this.find("tr").remove();
+  $.each(newrows, function () {
+    $this.append(this);
+  });
+});
+</script>
+
+<script type="text/javascript">
+  $(".updatepista").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+  function hideCortados(){
+    var but = $('.hidecut');
+    if (but.text()=='Esconder cortados'){
+      but.text('Mostrar cortados');
+    } else {
+      but.text('Esconder cortados');
+    }
+    $(".cortado").toggle();
+    $("td:contains('\u00a0')").toggle()
+  };
+</script>
+
+{% endif %}
+{% endblock %}

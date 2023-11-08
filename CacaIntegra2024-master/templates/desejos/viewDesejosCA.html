@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include "navbarMain.html" %}
+
+<div class="mx-auto" style="max-width: 700px; padding-bottom: 20px;">
+  <div class="mx-4">
+    <div class="cases">
+      <div class="container-fluid">
+        <div class='d-flex flex-column raleway-normal align-items-center mb-3'>
+          <a href="https://forms.gle/WzSW92EcmNpkJDSt8" type="button" name="button"
+             class="btn btn-left btn-outline-secondary mt-1 w-100">Forms</a>
+          <a href="https://t.me/desejosXLII" type="button" name="button"
+             class="btn btn-left btn-outline-secondary mt-1 w-100">Notificações Telegram</a>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="titlepage text_align_center">
+              <h2>O LOURO MANDOU</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end banner -->
+    <!-- about -->
+    {% for d in desejos %}
+    <div class="about2">
+      <div class="container_width">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="titlepage align-items-center">
+              <span style="color:white">
+                {{ d.texto|linebreaks }}
+              </span>
+              <br>
+              <p>Entregar até <span>{{ d.end_time|date:"d-m H:i" }}</span></p>
+              <br>
+              <p>
+                {{ d.pontos }} Estaleca{{ d.pontos|pluralize }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="cases2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="titlepage text_align_center">
+              <h3>O LOURO TINHA MANDADO</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for d in desejosPast %}
+    <div class="about2">
+      <div class="container_width">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="titlepage align-items-center">
+              <span style="color:grey">
+                {{ d.texto|linebreaks }}
+              </span>
+              <br>
+              <p style="color:grey">Entregar até <span>{{ d.end_time|date:"d-m H:i" }}</span></p>
+              <p>
+                {{ d.pontos }} Estaleca{{ d.pontos|pluralize }}
+              </p>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!-- end footer -->
+<!-- Javascript files-->
+{% block js %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% load static %}
+<div class="nav-container" style="background-color: black;">
+    <div class="container">
+        <header class="py-3 justify-content-end align-items-center">
+            <nav class="nav navbar navbar-expand-lg py-0" >
+                <div class="container-fluid">
+                    <a href="{% url 'paginaInicial' %}">
+                        <img src="{% static 'images/logo-horizontal.png' %}" alt="logo" class="logo">
+                    </a>
+                    <button class="navbar-toggler-main" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">&#9776;</span>
+                    </button>
+                    <div class="collapse navbar-collapse" id='navbar'>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="p-2 hormenu nav-link" href="{% url 'desejos:desejos' %}">Desejos</a></li>
+                            <li class="nav-item"><a class="p-2 hormenu nav-link" href="{% url 'artefatos:artefatos' %}">Artefatos</a></li>
+                            <li class="nav-item"><a class="p-2 hormenu nav-link" href="{% url 'personagens' %}">Personagens</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle hormenu" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Documentos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="{% static 'documents/Lista Social_XLII_Integrapoli.pdf' %}">Lista Social</a></li>
+                                  <li><a class="dropdown-item" href="{% static 'documents/Regulamento_XLII_Integrapoli.pdf' %}">Regulamento</a></li>
+                                  <li><a class="dropdown-item" href="{% static 'documents/Lista_Objetos_XLII_Integrapoli.pdf' %}">Lista de Objetos</a></li>
+                                  <li><a class="dropdown-item" href="{% static 'documents/FAQ_Lista_XLII_Integrapoli.pdf' %}">FAQ da Lista de Objetos</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/15KWU_8juFW4Jmo4GgK83U8vw0VLTSf42VjwBPPALKE0/edit?usp=sharing">Integration Bee</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/11quvt3LVBVD5Wf0H-yOlSiGnUVOpBSfrPRGyfREaEpM/edit?usp=sharing">Passa ou Repassa</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/1S7vCWzOee9zeDHvmX5nVBCwTd3pvaObe_hiQLtZqRZs/edit?usp=sharing">Ding Dong do Faustão</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/1Qz-JF-VNWqBxWfCcB_zHxRrrbi3Gv0HbTn0XsUXAj8A/edit?usp=sharing">Fila de Sliders</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/1oxh89c48ofPBoHNWR6kWo2pmf-N_nQoQZ6VOp-w1HhA/edit?usp=sharing">Interbrejas</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/1zfaGTeV1on0TiNZ724cF6QdFzqQs7j-MZbyniZK1C38/edit?usp=sharing">Velocidade de Breja</a></li>
+                                  <li><a class="dropdown-item" href="https://docs.google.com/document/d/11RcCFmlTJvGWAD6K0WjLm5TombQP1EKNnj-TZb2OLzg/edit?usp=sharing">Flip Cup</a></li>
+                                
+                                </ul>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="btn btn-md btn-outline-secondary" href="{% url 'dashboard' %}">Caça</a></li>
+                            {% else %}
+                            <li class="nav-item"><a class="btn btn-md btn-outline-secondary" href="{% url 'login' %}">Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+</div>

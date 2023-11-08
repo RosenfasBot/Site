@@ -1,0 +1,18 @@
+<dic class="modal-form">
+  <div class="modal-header">
+    <h5 class="modal-title">Exportar senhas</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+  <div class="modal-form-fields">
+      <h5>Senhas válidas</h5>
+      <small class='senha'>{{ senhas_validas|join:', '}}</small>
+      {% if senhas_invalidas %}
+      <hr>
+      <h5>Senhas inválidas</h5>
+      <small class='senha'>{{ senhas_invalidas|join:', '}}</small>
+      {% endif %}
+    </div>
+  </div>
+
+</div>

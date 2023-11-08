@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/mainCA.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CA %}
+
+{% include "navbarCA.html" %}
+
+{% if gerencial.caca_start %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+  
+<div class ='container'>
+  <h2 style='margin-top: 0.25rem;'>Pistas Vivas:</h2>  
+  <div class="tabela">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th nowrap class="ts-field-sm" scope="col">Hora início</th>
+          <th nowrap scope="col">Nº da Pista</th>
+          <th style="width: 99%;" scope="col">Conteúdo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pista in pistas_vivas %}
+        <tr>
+          <td>{{ pista.hora_inicio|date:"d/m H:i" }}</td>
+          <td>{{ pista.numero }}</td>
+          <td>{% include "pistas/viewConteudoPista.html" %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+<div class ='container'>
+  <h2 style='margin-top: 1rem;'>Próximas Dicas:</h2>  
+  <div class="tabela">
+    <table class="table table-bordered table-invert">
+      <thead>
+        <tr>
+          <th nowrap scope="col">Pista</th>
+          <th nowrap scope="col">Primeira Dica</th>
+          <th nowrap scope="col">Segunda Dica</th>
+          <th nowrap scope="col">Terceira Dica</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pviva in pistas_vivas %}
+          {% if pviva.horas_dica %}
+          <tr>
+            <th>{{ pviva }}</th>
+              {% for dica in pviva.horas_dica reversed %}            
+              <td class='{% if dica < agora %}Cortado{% endif %}'>{{ dica |date:"d/m H:i" }}</td>
+              {% endfor %}
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+<div class ='container mb-3'>
+  <h2 style='margin-top: 1rem;'>Caminhos:{% if cortado %}<button  onclick="hideCortados()" type="button" name="button" class="btn btn-left btn-outline-secondary hidecut">Esconder cortados</button>{% endif %}</h2>  
+  <div class="tabela">
+    <table class="table table-bordered table-invert" id='table-caminhos'>
+      <tbody>
+        {% for caminho in caminhos %}
+        <tr>
+          <td class='table-caminho-header {{ caminho.get_ativo_display }}'>{{ caminho.nome }}</td>
+          {% for pista in caminho.pistas_visiveis %}
+            <td class='table-caminho-pista viewpista {% if pista.status == 'recolhida' %} recolhida {% endif %}{{ caminho.get_ativo_display }}' data-form-url="{% url 'pistas:detail_pista_CA' pista.pk %}?next={{request.path}}">
+              {{ pista|default:"N.A." }}
+            </td>
+          {% endfor %}
+          {% for i in caminho.null_values %}
+          <td>
+            &nbsp;
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+{% else %}
+
+<div class='container' style='margin-top: 1rem;'>
+  <div class="d-flex flex-column min-vh-80 justify-content-center align-items-center">
+    <div class='center-box'>
+      <h2>Aguarde o Caça Começar</h2>
+      <br>
+        <p class="help-block">Estamos todos ansiosos. Enquanto isso, tente matar a seguinte pista:<br>Bela balela, só faltou o sapato dela.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CA %}
+
+<script type="text/javascript">
+  $("#table-caminhos").each(function () {
+    var $this = $(this);
+    var maxCell = 0;
+    $this.find("tr").each(function () {
+      var i = $(this).children('td').length;
+      if (i > maxCell){
+        maxCell = i;
+      }; 
+    });
+    $this.find("tr").each(function () {
+      var i = $(this).children('td').length;
+      for (a = 0; a < maxCell-i; a++){
+        $(this).append('<td>&nbsp;</td>');
+      }; 
+    });
+  });
+  
+  $(".table-invert").each(function () {
+    var $this = $(this);
+    var newrows = [];
+      $this.find("tr").each(function () {
+        var i = 0;
+        $(this).find("td,th").each(function () {
+            i++;
+            if (newrows[i] === undefined) {
+                newrows[i] = $("<tr></tr>");
+            }
+            newrows[i].append($(this));
+      });
+    });
+    $this.find("tr").remove();
+    $.each(newrows, function () {
+      $this.append(this);
+    });
+  });
+  </script>
+
+<script type="text/javascript">
+  $(".viewpista").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+  $(".modal").on("hidden.bs.modal", function(){
+    $(".modal-content").html("");
+});
+</script>
+
+<script type="text/javascript">
+  function hideCortados(){
+    var but = $('.hidecut');
+    if (but.text()=='Esconder cortados'){
+      but.text('Mostrar cortados');
+    } else {
+      but.text('Esconder cortados');
+    }
+    $(".cortado").toggle();
+    $("td:contains('\u00a0')").toggle()
+  };
+</script>
+
+{% endif %}
+{% endblock %}

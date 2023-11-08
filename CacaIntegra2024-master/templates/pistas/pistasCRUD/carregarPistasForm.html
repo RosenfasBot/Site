@@ -1,0 +1,44 @@
+<div class="modal-form">
+
+  <div class="modal-header">
+    <h5 class="modal-title">Carregar Pistas de uma planilha</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+
+
+  
+  <div class="modal-form-fields">
+    <div class="form-group">
+      <a href='https://docs.google.com/spreadsheets/d/1T3BFgs8X9X3KFMXQWatiWmCHINwaEqPMCQ6XeVgRQr8/edit?usp=sharing' class="btn btn-success mb-2" target="_blank" ><i class="fa fa-regular fa-file-spreadsheet"></i>&nbsp;&nbsp;Planilha de template</a>
+      <br>
+      <label class="control-label" for="id_link">Link da planilha</label>
+      <div class=" ">
+        <input type="text" name="link" autocapitalize="none" autofocus="" class="form-control" required="" id="id_link">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-footer">
+    <button type="button" onclick="send_link()" class="submit-btn btn btn-primary">Criar</button>
+  </div>
+
+</form>
+
+<script>
+  function send_link(valor) {
+    $.ajax({
+      type:"post",
+      url:"{% url 'pistas:carregar_pistas' %}",
+      data: {
+        link: document.getElementById('id_link').value,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (html) {
+        $(".modal-content").html(html);
+      }
+    });
+  };
+
+</script>

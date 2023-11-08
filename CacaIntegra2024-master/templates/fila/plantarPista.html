@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+      <tr>
+        <th>Número da pista</th>
+        <th>Urgência</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% if pistas %}
+        {% for pista in pistas %}
+        <tr class='table-caminho-pista updatepapel'
+        data-form-url="{% url 'pistas:plantar_pista' pista.0.pk %}?next={{request.path}}">
+          <td>{{pista.0.numero}}
+          </td>
+
+          {% if pista.0.caminho %}
+          <td style='background-color:red; color: white'>Altíssima - atribuída a caminho</td>
+          {% elif pista.1 <= 8 %}
+          <td style="background-color: orange">Alta - posição {{ pista.1 }} na fila</td>
+          {% elif pista.1 <= 16 %}
+          <td style="background-color: yellow">Média - posição {{ pista.1 }} na fila</td>
+          {% else %}
+          <td style="background-color: white">Baixa - posição {{ pista.1 }} na fila</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+
+<script type="text/javascript">
+    $(function editarCaminho() {
+        $(".updatepapel").each(function () {
+            $(this).modalForm({
+            formURL: $(this).data("form-url")
+            });
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+  $(".updatepapel").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+
+</script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endif %}
+{% endblock %}

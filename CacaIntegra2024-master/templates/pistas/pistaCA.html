@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ pista }}</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <div class="">
+    Número da pista: {{ pista.numero }}
+  </div>
+  {% if pista.status == 'recolhida' %}
+  <div class="">
+    Validador: {{ pista.senha }}
+  </div>
+  {% endif %}
+
+  <div class="">
+    Hora de Início: {{ pista.hora_inicio|date:"d/m H:i" }}
+  </div>
+
+  {% if pista.status == 'recolhida' %}
+  <div class="">
+    Hora Recolhida: {{ pista.hora_recolhida|date:"d/m H:i" }}
+  </div>  
+  {% endif %}
+
+</div>
+<hr>
+<div class="pista-body m-3">
+  {% include "pistas/viewConteudoPista.html" %}
+</div>

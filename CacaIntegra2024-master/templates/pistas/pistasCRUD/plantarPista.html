@@ -1,0 +1,69 @@
+<form method="post" class="modal-form" action="">
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h5 class="modal-title">Plantar Pista {{ pista.numero }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-form-fields m-3">
+    <div class="pista-body">
+      {% include "pistas/viewConteudoPista.html" %}
+    </div>
+    <hr>
+     <div><b>Macro:</b> {{pista.macro}}</div>
+     <div><b>Micro:</b> {{pista.micro}}</div>
+    </p>
+      <div><b>Solução:</b> {{pista.solucao}}</div>
+      {% if pista.observacao %}
+      <div><b>Obs:</b> {{pista.observacao}}</div>
+      {% endif %}
+  </p>
+    <hr>
+    {% for field in form %}
+    <div class="form-group{% if field.errors %} invalid{% endif %}">
+      <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <div class=" ">
+        {% if not field.label == 'Senha' %}
+        {{ field }}
+        {% else %}
+        <input class="form-control" list="datalistOptions" id="{{ field.id_for_label }}" placeholder="Digite a senha">
+        <datalist id="datalistOptions">
+          {% for s in senhas %}
+          <option data-value="{{ s.pk }}">{{ s }}</option>
+          {% endfor %}
+        </datalist>
+        <input type="hidden" name="{{ field.name }}" id="{{ field.id_for_label }}-hidden">
+        {% endif %}
+        {% for error in field.errors %}
+        <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="modal-footer">
+      <button type="button" class="submit-btn btn btn-primary">Plantar</button>
+    </div>
+  </div>
+</form>
+
+<script>
+    document.querySelector('input[list]').addEventListener('input', function(e) {
+    var input = e.target,
+        list = input.getAttribute('list'),
+        options = document.querySelectorAll('#' + list + ' option'),
+        hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+        inputValue = input.value;
+
+    hiddenInput.value = inputValue;
+
+    for(var i = 0; i < options.length; i++) {
+        var option = options[i];
+
+        if(option.innerText === inputValue) {
+            hiddenInput.value = option.getAttribute('data-value');
+            break;
+        }
+    }
+});
+
+</script>

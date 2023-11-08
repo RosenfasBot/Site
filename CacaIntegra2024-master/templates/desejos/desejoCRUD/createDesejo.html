@@ -1,0 +1,32 @@
+<form method="post" class="modal-form" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h5 class="modal-title">Criar novo desejo</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+  <div class="modal-form-fields">
+    {% for field in form %}
+    <div class="form-group{% if field.errors %} invalid{% endif %}">
+      <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <div class=" ">
+        {{ field }}
+        {% for error in field.errors %}
+        <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="submit-btn btn btn-primary">Criar</button>
+  </div>
+
+</form>
+
+<script>
+    document.getElementById('id_start_time').setAttribute('type', 'datetime-local');
+    document.getElementById('id_end_time').setAttribute('type', 'datetime-local');
+</script>

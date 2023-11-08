@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+{% if userContext %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <h2>Usuários:<button type="button" name="button" class="btn btn-left btn-outline-secondary modalButton" data-form-url="{% url 'users:create_user' %}">Criar
+      Usuário</button></h2>
+  <div class="tabela">
+    <table class="table table-bordered" id="Table">
+      <thead>
+        <tr>
+          <th scope="col">SessID</th>
+          <th scope="col">Username</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">É CA</th>
+          <th scope="col">É CO</th>
+          <th scope="col">Último login</th>
+          <th scope="col">Logado</th>
+          <th scope="col" style="width: 200px;">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in userContext|dictsortreversed:"logado" %}
+        <tr>
+          <td>{{ user.sessId|truncatechars:6}}</td>
+          <td>{{ user.user.username }}</td>
+          <td>{{ user.user.email }}</td>
+          <td>{% if user.user.is_CA is True %}<i class="fa fa-check"></i>{% elif user.user.is_CA is False %}<i
+              class="fa fa-times"></i>{% endif %}</td>
+          <td>{% if user.user.is_CO is True %}<i class="fa fa-check"></i>{% elif user.user.is_CO is False %}<i
+              class="fa fa-times"></i>{% endif %}</td>
+          <td>{{ user.user.last_login|date:"d/m H:i" }}</td>
+          <td>{% if user.logado is True %}<i class="fa fa-check"></i>{% elif user.logado is False %}<i
+              class="fa fa-times"></i>{% endif %}</td>
+          <td style='text-align: center;'>
+            <button type="button" name="button" class="btn btn-primary modalButton btn-ctrl"
+              data-form-url="{% url 'users:detail_user' user.user.pk %}"><i class="far fa-eye"></i></button>
+            <button type="button" name="button" class="btn btn-success modalButton btn-ctrl"
+              data-form-url="{% url 'users:update_user' user.user.pk %}"><i class="fas fa-edit"></i></button>
+            <button type="button" name="button" class="btn btn-danger modalButton btn-ctrl"
+              data-form-url="{% url 'users:delete_user' user.user.pk %}"><i class="far fa-trash-alt"></i></button>
+            {% if user.logado %}
+            <button type="button" name="button" class="btn btn-danger modalButton btn-ctrl"
+              data-form-url="{% url 'delete_session' user.sessId %}"><i class="fa fa-sign-out"></i></button>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+No users registered
+{% endif %}
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+
+<script type="text/javascript">
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+
+{% endif %}
+{% endblock %}

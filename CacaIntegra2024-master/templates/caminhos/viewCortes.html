@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+{% if user.is_authenticated and user.is_CO %}
+
+{% include "navbarCO.html" %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class='container'>
+  <h2>Cortes:
+    <button type="button" name="button" class="btn btn-left btn-outline-secondary modalButton" data-form-url="{% url 'caminhos:create_corte' %}">
+      Criar Corte
+    </button>
+  </h2>
+  <div class="tabela">
+    <table class="table table-bordered" id="table">
+      <thead>
+      <tr>
+        <th scope="col">Nível</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Caminhos</th>
+        <th scope="col" style="width: 50px;">Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for corte in cortes %}
+      <tr>
+        <td>{{ corte.nivel }}</td>
+        <td>{{ corte.quantidade }}</td>
+        <td>{% for caminho in corte.caminhos_afetados.all %}
+          {{ caminho.nome }}
+          {% endfor %}
+        </td>
+        <td style='text-align: center;'>
+          <button type="button" name="button" class="btn btn-danger modalButton btn-ctrl"
+                  data-form-url="{% url 'caminhos:delete_corte' corte.pk %}"><i class="fa fa-trash-alt"></i></button>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and user.is_CO %}
+<script type="text/javascript">
+  $(".modalButton").each(function () {
+    $(this).modalForm({
+      formURL: $(this).data("form-url")
+    });
+  });
+</script>
+
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endif %}
+{% endblock %}

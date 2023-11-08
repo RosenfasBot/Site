@@ -1,0 +1,58 @@
+<form method="post" class="modal-form" onsubmit="return validateForm()" name='form'>
+    {% csrf_token %}
+  
+   <div class="modal-header">
+      <h5 class="modal-title">Atualizar Usuário</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+  
+    <div class="modal-form-fields">
+      {% for field in form %}
+      <div class="form-group{% if field.errors %} invalid{% endif %}">
+        {% if field.field.widget.input_type == 'checkbox' %}
+        {{ field }}
+        <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% for error in field.errors %}
+        <p class="help-block">{{ error }}</p>
+        {% endfor %}
+        {% else %}
+        <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class=" ">
+          {{ field }}
+          {% for error in field.errors %}
+          <p class="help-block">{{ error }}</p>
+          {% endfor %}
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="submit-btn btn btn-primary">Atualizar</button>
+    </div>
+  
+  
+  </form>
+
+  <script>
+    function validateForm() {
+      var ca = document.forms["form"]["is_CA"].checked;
+      var co = document.forms["form"]["is_CO"].checked;
+      var is_radio = document.forms["form"]["is_radio"].checked;
+      var radio = document.forms["form"]["radio"].value;
+      if (ca & co) {
+        alert("Deselecione a Conta de CA ou Conta de CO");
+        $(".submit-btn").prop("disabled", false);
+        return false;
+      } else if (ca & !is_radio & !radio){
+        alert("Selecione um rádio");
+        $(".submit-btn").prop("disabled", false);
+        return false;
+      } else if (!ca & !co){
+        alert("Selecione Conta de CA ou Conta de CO");
+        $(".submit-btn").prop("disabled", false);
+        return false;
+      } 
+    }
+  </script>

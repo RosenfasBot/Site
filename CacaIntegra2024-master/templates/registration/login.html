@@ -1,0 +1,51 @@
+<!--users/templates/registration/login.html-->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class='container'>
+  <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class='center-box raleway-normal about2 m-5 p-5'>
+      <div class="row justify-content-center">
+        <div class="col">
+          <div class='m-auto' style="max-width:300px; width: 80%;">
+          <img src="{% static 'images/logo-vertical.png' %}" alt="logo" style="margin-left: -50%; margin-right: -50%" class="w-100 mb-4">
+          </div>
+          <h2 class="raleway-title">Login</h2>
+
+          <form method="post" class='login-form'>
+            {% csrf_token %}
+            <div class="form-fields">
+
+              <div class="form-group">
+                <div class="form-input">
+                  <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span>
+                  </div>
+                  <input type="text" name="username" autofocus="" autocapitalize="none" placeholder="Usuário"
+                         autocomplete="username" maxlength="150" required="" id="id_username" style="width: 100%">
+
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-input">
+                  <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span>
+                  </div>
+                  <input type="password" name="password" autocomplete="current-password" placeholder="Senha" required=""
+                         id="id_password" style="width: 100%">
+
+                </div>
+              </div>
+            </div>
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}" data-theme='dark'></div>
+            <input class="btn btn-md btn-custom btn-primary" type="submit" value="Login">
+          </form>
+          <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

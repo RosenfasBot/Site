@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h5 class="modal-title">Detalhes do Caminho</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <div class="">
+    Nome: {{ caminho.nome }}
+  </div>
+  <div class="">
+    Tamanho: {{ caminho.tamanho }}
+  </div>
+  <div class="">
+    Ativo: {{ caminho.ativo }}
+  </div>
+  <div class="">
+    CAs Ativos: {% for CA in caminho.CAsAtivos.all %} {{ CA.ca_short }} {% endfor %}
+  </div>
+  <hr>
+  <h5>Pistas:</h5>
+  <table class="table table-bordered" id="table">
+    <tbody>
+    <thead>
+    <tr>
+      <th scope="col">Senha</th>
+      <th scope="col">Número da pista</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    {% for pis in caminho.pistas.all %}
+    <tr>
+      <td>{{ pis.senha }}</td>
+      <td>{{ pis }}</td>
+      <td>{{ pis.get_status_display }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+</div>

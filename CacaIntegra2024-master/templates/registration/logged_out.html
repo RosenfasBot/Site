@@ -1,0 +1,31 @@
+<!--users/templates/registration/login.html-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class='container'>
+  <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class='center-box raleway-normal about2 m-5 p-5'>
+      <div class="row justify-content-center">
+        <div class="col">
+          <h2 class="raleway-title">Deslogado!</h2>
+
+          <div>
+            <a href="{% url 'login' %}">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">   
+    function Redirect() 
+    {  
+        window.location="{% url 'login' %}"; 
+    } 
+    setTimeout('Redirect()', 3000);   
+
+</script>
+{% endblock %}
