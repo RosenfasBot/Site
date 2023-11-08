@@ -25,7 +25,7 @@ cd CacaIntegra2024
 **Instalar requirements**
  
 ```commandline 
-pip install -r requirements.txt
+pip install -r requirements.txt 
 ```
 
 **Instalar postgresql**
