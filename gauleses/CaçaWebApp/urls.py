@@ -33,7 +33,7 @@ urlpatterns = [
 
     # Comum
     path("", TemplateView.as_view(template_name='comum/pagInicial.html'), name="paginaInicial"),
-    path("personagens/", TemplateView.as_view(template_name='comum/personagens.html'), name="personagens"),
+    path("vemcorrercomnois/", TemplateView.as_view(template_name='comum/vemcorrercomnois.html'), name="vemcorrercomnois"),
 
     # Dash
     path("dashboard/", login_required(caminhosViews.caca_dashboard), name="dashboard"),

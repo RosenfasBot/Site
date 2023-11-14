@@ -30,7 +30,7 @@ text-decoration: none;
 }
 
 .hormenu{
-    color: whitesmoke !important;
+    color: rgb(255, 115, 0) !important;
     text-decoration: none;
 }
 
@@ -399,7 +399,9 @@ td{
     width: 100%;
 }
 
-
+.p display-4 {
+    color:orange
+}
 
 
 @media (max-width: 991px) {

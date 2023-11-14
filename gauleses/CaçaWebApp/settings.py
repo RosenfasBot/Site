@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'logs',
     'pistas',
     'storages',
+    'django_unused_media',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
