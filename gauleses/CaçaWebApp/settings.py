@@ -29,10 +29,10 @@ DEBUG = True if config('DEBUG') == "TRUE" else False
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'integrapoli.herokuapp.com',
-    'integrapoli.com',
     'www.integrapoli.com',
-    '.ondigitalocean.app'
+    '.ondigitalocean.app',
+    'gaulesescmr.com', 
+    'www.gaulesescmr.com'
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
