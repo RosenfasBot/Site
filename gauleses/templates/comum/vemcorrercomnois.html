@@ -3,7 +3,6 @@
 {% block content %}
 {% include "navbarMain.html" %}
 
-<!doctype html>
 <html lang="en">
 
 <head>
@@ -14,94 +13,135 @@
 </head>
 
 <body>
-    <body style="background-color:black;">
-    <style>
-        .orange-text {
-          color: orange !important;
-        }
-        .white-text {
-            color: white !important;
-        }
-    </style>
 
-    <div class="d-flex container-fluid" lc-helper="background" style="height:70vh;background:url(../static/images/mini_caca_2023.jpg)  center / cover no-repeat;">
-    </div>
-    <div class="container p-5 bg-black" style="margin-top:-300px">
-        <div class="row">
-            <div class="col-md-4 text-center align-self-center">
-                <div class="lc-block border-end border-2 ">
+    <body style="background-color:rgba(0, 0, 0, 0.9)">
+        <style>
+            .orange-text {
+              color: orange !important;
+            }
+            .white-text {
+                color: white !important;
+            }
+
+              .highlight-container, .highlight {
+                position: relative;
+              }
+              
+              .highlight-container {
+                display: inline-block;
+              }
+              .highlight-container:before {
+                content: " ";
+                display: block;
+                height: 130%;
+                width: 100%;
+                margin-left: -3px;
+                margin-right: -3px;
+                position: absolute;
+                background: #000000;
+                transform: rotate(5deg);
+                top: 5px;
+                left: -1px;
+                border-radius: 20% 25% 20% 24%;
+                padding: 10px 3px 3px 10px;
+              }
+
+        </style>
+
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div lc-helper="background" class="col-md-6 order-md-2 ps-4 d-flex" style="background-size: cover; background-position: top; background-image: url(../static/images/mini_caca_2023.jpg);">
+                <div class="lc-block align-self-center text-light ms-4">
                     <div editable="rich">
-                        <p class="display-4 text-secondary orange-text">Por que correr (o Caça) com nois?</p>
+                        <h2 class="fw-bold display-1 orange-text "><span class="highlight-container"><span class="highlight">JJ,</span></span>&nbsp;<br><span class="highlight-container"><span class="highlight">Geral</span></span>&nbsp;<br><span class="highlight-container"><span class="highlight">Junto</span></span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 order-md-1" style="padding:5vh 5vw">
+                <div class="lc-block mb-5">
+                    <div editable="rich">
+                        <p class="display-4 orange-text"><strong>"Já escreveu aí no site que o CMR é foda? É o mínimo. Além disso, o CMR é laranja." <br> -D. Cho&nbsp;</strong></p>
                     </div>
                 </div><!-- /lc-block -->
-            </div><!-- /col -->
-            <div class="col-md-8">
-                <div class="lc-block ">
+                <div class="lc-block text-secondary pb-4">
                     <div editable="rich">
-                        <p class="display-5 orange-text">"Já escreveu aí no site que o CMR é foda? É o mínimo. Além disso, o CMR é laranja." -D. Cho </p>
+                        <p class="display-10 white-text">Piadas à parte, correr o Caça (e o Integra) com o CMR, é uma loucura. Matar enigmas e pistas para achar papeizinhos na USP inteira é só uma parte da experiência. O que a gente mais preza (além da vitória), é a possibilidade de todos participarmos de uma comunidade que vive distante, mas que se une ocasionalmente para se divertir e competir em grupo!&nbsp;</p>
+                    </div>
+                </div>
+                <div class="lc-block text-secondary">
+                    <div editable="rich">
+                        <p class="display-10 white-text">O CMR sempre quer sangue novo e gente bacana! Seja você um apaixonado pelo caça ou apenas um participante curioso do CMR, você é mais que bem vindo a participar dessa experiência que atravessa gerações. Uma vez por ano, nos encontraremos, e festejaremos!</p>
                     </div>
                 </div><!-- /lc-block -->
-            </div><!-- /col -->
-        </div>
-        <div class="row">
-            <div class="col-md-9 offset-md-1">
-                <div class="lc-block mt-5">
-                    <div editable="rich">
-                        <p class="lead text-secondary white-text"> Piadas à parte, correr o Caça (e o Integra) com o CMR, é uma loucura. Matar enigmas e pistas para achar papeizinhos na USP inteira é só uma parte da experiência. O que a gente mais preza (além da vitória), é a possibilidade de todos participarmos de uma comunidade que vive distante, mas que se une ocasionalmente para se divertir e competir em grupo! &nbsp;</p>
-                        <p class="lead text-secondary white-text">O CMR sempre quer sangue novo e gente bacana! Seja você um apaixonado pelo caça ou apenas um participante curioso do CMR, você é mais que bem vindo a participar dessa experiência que atravessa gerações. Uma vez por ano, nos encontraremos, e festejaremos! </p>
-                    </div>
-                </div><!-- /lc-block -->
-            </div><!-- /col -->
+            </div>
         </div>
     </div>
 
-    <div class="d-flex container-fluid" lc-helper="background" style="height:70vh;background:url(../static/images/caca_vitoria.jpg)  center / cover no-repeat;">
-    </div>
-    <div class="container p-5 bg-black" style="margin-top:-300px">
-        <div class="row">
-            <div class="col-md-4 text-center align-self-center">
-                <div class="lc-block border-end border-2 ">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div lc-helper="background" class="col-md-6 order-md-1 ps-4 d-flex" style="background-size: cover; background-position: center; background-image: url(../static/images/caca_vitoria.jpg);">
+                <div class="lc-block align-self-center text-light ms-4">
                     <div editable="rich">
-                        <p class="display-4 text-secondary orange-text">E ganhar o caça, é bom?</p>
+                        <h2 class="fw-bold display-1 orange-text "><span class="highlight-container"><span class="highlight">E geral junto</span></span>&nbsp;<br><span class="highlight-container"><span class="highlight">é bão</span></span>&nbsp;<br><span class="highlight-container"><span class="highlight">demais</span></span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 order-md-2" style="padding:5vh 5vw">
+                <div class="lc-block mb-5">
+                    <div editable="rich">
+                        <p class="display-4 orange-text"><strong>"Você já ganhou o caça? Eu não fiquei feliz assim nem quando meu filho nasceu." <br> -Anônimo&nbsp;</strong></p>
                     </div>
                 </div><!-- /lc-block -->
-            </div><!-- /col -->
-            <div class="col-md-8">
-                <div class="lc-block ">
+                <div class="lc-block text-secondary pb-4">
                     <div editable="rich">
-                        <p class="display-5 orange-text">"É tipo ganhar o prêmio Nobel "</p>
+                        <p class="display-10 white-text">Não é sobre ganhar o caça, é claro. Novamente, a jornada e as pessoas são as coisas mais importantes e também as que a gente leva pra frente. Mas ganhar o caça é bom demais. Talvez, a maior catarse que você vai viver. Talvez, você nem fique tão feliz assim conquistando medalhas do Pan-Americano. Talvez, você comece a ficar feliz por causa do caça. O ponto é: você vai deixar de correr com o CMR e experienciar isso por qual motivo?&nbsp;</p>
+                    </div>
+                </div>
+                <div class="lc-block text-secondary">
+                    <div editable="rich">
+                        <p class="display-10 white-text">
+                            "Eu não posso, não tenho onde dormir e minha família é contra :(" Pode ficar tranquilo(a) que sempre vai ter espaço no CMR, ou alguém vai te ajudar com o que você precisar. Cama, lenço umedecido, grana ou banheiro. Vai dar tudo certo.<br> </p>
+                            <p class="display-10 white-text">
+                            "Caraca, mas eu fui no caça e parece muito difícil e cansativo. Acho que não to a fim..." É mesmo, mas como um bom vinho, você vai aprender com o tempo. Cada um desempenha o seu papel, do seu jeito. Só o fato de você estar lá, dando a vida, já é tanta ajuda quanto pegar pista!<br> </p>
+                            <p class="display-10 white-text">
+                            "Nossa mas, esse pessoal de 30 anos fica vindo pro CMR fazer o que? Vai trabalhar". Além de aprender e se divertir, entender o próximo é uma das coisas que acontece no caça. O que é de criança, é moralismo, da forma mais burra e pura!<br> </p>
                     </div>
                 </div><!-- /lc-block -->
-            </div><!-- /col -->
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-9 offset-md-1">
-                <div class="lc-block mt-5">
-                    <div editable="rich">
-                        <p class="lead text-secondary white-text"> Piadas à parte, correr o Caça (e o Integra) com o CMR, é uma loucura. Matar enigmas e pistas para achar papeizinhos na USP inteira é só uma parte da experiência. O que a gente mais preza (além da vitória), é a possibilidade de todos participarmos de uma comunidade que vive distante, mas que se une ocasionalmente para se divertir e competir em grupo! &nbsp;</p>
-                        <p class="lead text-secondary white-text">O CMR sempre quer sangue novo, e gente bacana! Seja você um apaixonado pelo caça ou apenas um participante curioso do CMR, você é mais que bem vindo a participar dessa experiência que atravessa gerações. Uma vez por ano, nos encontraremos, e festejaremos! </p>
-                    </div>
-                </div><!-- /lc-block -->
-            </div><!-- /col -->
+    </div>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+    <div lc-helper="background" class="container-fluid py-5 mb-4 d-flex justify-content-center" style="  background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1124&amp;q=100');
+    background-position: center; background-size:cover; background-repeat:no-repeat">
+        <div class="p-5 mb-4 lc-block col-xxl-7 col-lg-8 col-12" style=" backdrop-filter: blur(6px) saturate(102%);
+    -webkit-backdrop-filter: blur(6px) saturate(102%);
+    background-color: rgba(255, 255, 255, 0.45);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);">
+            <div class="lc-block">
+                <div editable="rich">
+                    <h2 class="fw-bolder display-3">Tá esperando o que?</h2>
+                </div>
+            </div>
+            <div class="lc-block col-md-8">
+                <div editable="rich">
+                    <p class="lead">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.
+                    </p>
+                </div>
+            </div>
+            <div class="lc-block">
+                <a class="btn btn-dark" href="#" role="button">Click me, I'm a button</a>
+            </div>
         </div>
     </div>
 
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>
-
-
-
-
-
-<div class='container'>
-    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-        <div class='center-box'>
-        Aqui tem os personagens
-        </div>
-    </div>
-    </div>
-</div>
 
 </html>
 
