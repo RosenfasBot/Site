@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mmc-2023",
+  "private_key_id": "920e16e15c52ce72507becc987cdd35c418702fd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDu/w/01tmUUcH8\n7ZqzaIzg6Z4ZXeKhQy2xvIpKJjgeMq36vuoVCWMFnLzPL9T1yDilUxiGV+vVuSRV\n0zltz2tidtqb65O6fsrflziG5MITa6lbOGVYCNS87VBvPrNN8OCa1HRM+gPhRViv\nD/I5HmIK5wUd73WKu37KOE2Aw3cGt+U93DOxxzcsiS67Hw9QE8X9uZW/NCLVYu0x\n1hpyU56ybGEzFQhf4Dm1qGkX9ioMrMlYpdtz6ryg4hyUbsdZIRpdrx7Y8djqqjpO\nClLxlMjm+iDbrD6dGQ8hQ5azoBvfRB9WodGU5YTzlwUQ/0yejb2Plx5hh3dtVRMB\nPR+CFpfJAgMBAAECggEAMYGdRQriTDJ5XBK96m78S7So3rlPcjcvtnMHNF/hXQQD\nfP7iD1R/8hArHkHau8TrUve5C08YF4//4lVcPo5qQJ29H/I3Cjksfg9dkre9Kfex\nv6cZexhtNOt1r22OB9WfOQNMSgu6FQZf3feQJdvQ1FBRg4dwUjoPhAUQrN0QgU/d\nDZ1qK4JbgQ+ofqz7J28VfRtky/pVXjKJyJsp8GxIoBVUw5vj7k1PrZh6MpSo9AP/\nba9GpfXYBuGnoYOomObmiMTK48JJsJ7H6Dw8367sy261eyCHhIehOnwxJWfUKR0f\nBAoqYgLdYESUss3Dgkf1B4RHcvClZ5vXBv6odaks1wKBgQD6NTyRcgrbbFZTQMTM\nP0Z7PTqg16NVKIRYG/ka4L1JOqP5UhlyKirDzDZ+UDuHGK5yPvnt55fdGdItnfLJ\nzyS+3/lV614JLvcVDm+XRcFDwDD1TQ9xZpNquWXObym7bj9uXeaMT0YVWZME799m\nzoF3tjRIJpgy6lKAcuOLII5e/wKBgQD0h2JhFptnmEY2qDboSYe80T5csttBeBui\nRgRTJLzPyiJliqjeGbNsosE1FkrF8JwJgfWKlFtvSJMRenGUNZRjRD7A2yZ3mrpe\nDm5GRBEP3rZe7/um8MjCt4zaVMF5uJYvE/79RUwsOw87FIJ4Kjc5cQEGDHfMgdrp\nn8736g7RNwKBgQDv3ovDcE6CT5lu1QAWQ28hhPCo9DIs2NwP0Dl/kAdHpgU/Z3rn\nnQ9EiImRjP+Uo4/SDRf0APvxRujdPLheysyShQx3V17edP0BXcaTgpcmiaEl+gud\nDtazESxNvPqIKsh62WDGENXCcA5nREOrPryV9MKojP+KiGQxqnMElWCIJwKBgBSm\n5oEqpp9eNffhxxlhNGyXA3xSwr/JxBO1dCINhUDLYpJO3qo7Y3L2X/j60//ZrWQE\nLNeyZfKFH56nR7ZrvAeSOPaSy7HoSHsvHtMiZop/lcl43TkhNuNzGxtJczmzhEOf\nnbaIRsGpj0S/G7HIZveb+qknHmsQQIvgqls30l6LAoGBAMEshg7Y8p2n8J8R8oDn\naxQlYu/Efnf8Eqt39hoe1JajljpyJFspgtigsvfjeOgCNtcoB0K7B5NLc0fmqOp1\naTN5PG2ZDcg2aTNeKmgJU0PJ/agbfKgNB7q7mUpac/DsnVAyzZUoXP5LTNcR0ekm\nc1NeTUHy63bb3zIZeQfYgsMS\n-----END PRIVATE KEY-----\n",
+  "client_email": "renan-gauleses-mmc-planilha@mmc-2023.iam.gserviceaccount.com",
+  "client_id": "101181748695273702638",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/renan-gauleses-mmc-planilha%40mmc-2023.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
