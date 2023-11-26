@@ -2,12 +2,25 @@
 
 {% block content %}
 {% include "navbarMain.html" %}
-<div class='container'>
-    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-        <div class='center-box'>
-        Aqui tem a página principal
-        </div>
-    </div>
-    </div>
+
+<!--  <img main src="static/images/divulgacao.jpg" alt="Description of the image"> -->
+
+<style>
+    .imagemhomepage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .responsive {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<div class="imagemhomepage">
+    <img src="static/images/divulgacao.jpg" alt="Nature" class="responsive">
 </div>
+
 {% endblock %}
