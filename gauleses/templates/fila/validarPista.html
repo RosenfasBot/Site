@@ -82,19 +82,23 @@
         document.getElementById('id_senha').value = value;
     }
 
-    // Get the referrer URL
-    var referrerUrl = document.referrer;
+    // Get the current URL
+    var currentUrl = window.location.href;
 
-    // Parse the URL to extract parameters
-    var urlParams = new URLSearchParams(referrerUrl);
-    var parameterValue = urlParams.get('senha');
+    // Create a new URL object
+    var urlObject = new URL(currentUrl);
+
+    // Get the parameter value
+    var parameterValue = urlObject.searchParams.get('senha');
 
     // Check if the parameter exists and is not null
     if (parameterValue !== null) {
-        // Call the function to fill the form with the parameter value
+        // Decode the parameter value and then fill the form
+        parameterValue = decodeURIComponent(parameterValue);
         fillForm(parameterValue);
     }
 });
+
 </script>
 
 <script type="text/javascript">
