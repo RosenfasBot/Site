@@ -75,6 +75,28 @@
 
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Function to fill the form with parameters
+    function fillForm(value) {
+        document.getElementById('id_senha').value = value;
+    }
+
+    // Get the referrer URL
+    var referrerUrl = document.referrer;
+
+    // Parse the URL to extract parameters
+    var urlParams = new URLSearchParams(referrerUrl);
+    var parameterValue = urlParams.get('senha');
+
+    // Check if the parameter exists and is not null
+    if (parameterValue !== null) {
+        // Call the function to fill the form with the parameter value
+        fillForm(parameterValue);
+    }
+});
+</script>
+
 <script type="text/javascript">
   let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
 
