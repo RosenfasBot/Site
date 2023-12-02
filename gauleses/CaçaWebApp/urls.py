@@ -52,4 +52,8 @@ urlpatterns = [
     path('desejos/', include('desejos.urls')),
     path('usuarios/', include('users.urls')),
 
+
+    #Extra 
+    path("cinema", TemplateView.as_view(template_name='comum/cinema.html'), name="cinema"),
+
 ] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
