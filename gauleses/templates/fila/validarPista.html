@@ -35,11 +35,11 @@
             </div>
           </div>
         </div>
-        
+       <!-- 
         <div id="camera-preview" style="position: relative;">
           <video id="preview" style="max-width: 100%; display: flex; margin-bottom: 0.5rem;"></video>
           <button type="button" id="switchCamera" data-val='1'><i class="fa-solid fa-camera-rotate"></i></button>
-        </div>
+        </div> -->
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}" data-theme='dark'></div>
         <input class="btn btn-md btn-custom btn-primary w-100" type="submit" value="Validar" onclick="validar(event)">
@@ -72,6 +72,32 @@
           e.preventDefault();
       }
   }
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Function to fill the form with parameters
+    function fillForm(value) {
+        document.getElementById('id_senha').value = value;
+    }
+
+    // Get the current URL
+    var currentUrl = window.location.href;
+
+    // Create a new URL object
+    var urlObject = new URL(currentUrl);
+
+    // Get the parameter value
+    var parameterValue = urlObject.searchParams.get('senha');
+
+    // Check if the parameter exists and is not null
+    if (parameterValue !== null) {
+        // Decode the parameter value and then fill the form
+        parameterValue = decodeURIComponent(parameterValue);
+        fillForm(parameterValue);
+    }
+});
 
 </script>
 
