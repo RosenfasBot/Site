@@ -61,6 +61,6 @@ urlpatterns = [
     path("edwardrichtofen", TemplateView.as_view(template_name='comum/edwardrichtofen.html'), name="edwardrichtofen"),
     path("drzomboss", TemplateView.as_view(template_name='comum/drzomboss.html'), name="drzomboss"),
     path("gerrylane", TemplateView.as_view(template_name='comum/gerrylane.html'), name="gerrylane"),
-
+    path("ACTCACCCTTGCGGTGTTTCGTTGGTGTCCACAGAGTAAG", TemplateView.as_view(template_name='comum/ACTCACCCTTGCGGTGTTTCGTTGGTGTCCACAGAGTAAG.html'), name="ACTCACCCTTGCGGTGTTTCGTTGGTGTCCACAGAGTAAG"),
 
 ] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
