@@ -114,16 +114,16 @@ def validar_pista(request):
         if not request_body:
             return None
 
-        recaptcha_response = request_body['g-recaptcha-response']
-        data = {
-            'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-            'response': recaptcha_response
-        }
-        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-        result = r.json()
+        #recaptcha_response = request_body['g-recaptcha-response']
+        #data = {
+        #    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+        #    'response': recaptcha_response
+        #}
+        #r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+        #result = r.json()
         # caso o captcha não tenha sido preenchido
-        if not result['success']:
-            return render(request, './fila/validarPista.html', {'erro': 'Preenche o captcha, seu bobão'})
+        #if not result['success']:
+        #    return render(request, './fila/validarPista.html', {'erro': 'Preenche o captcha, seu bobão'})
 
         userCA = request.user.userca
         # caso o CA esteja em timeoout de pistas

@@ -37,18 +37,18 @@ class MyLoginView(auth_views.LoginView):
         request_body = self.request.POST
         if not request_body:
             return None
-        recaptcha_response = request_body['g-recaptcha-response']
-        data = {
-            'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-            'response': recaptcha_response
-        }
-        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-        result = r.json()
-        if result['success']:
-            return super().post(form)
-        else:
+        #recaptcha_response = request_body['g-recaptcha-response']
+        #data = {
+        #    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+        #    'response': recaptcha_response
+        #}
+        #r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+        #result = r.json()
+        #if result['success']:
+        return super().post(form)
+        #else:
             # avisar que o captcha deu errado
-            return redirect('login')
+        #    return redirect('login')
 
 
 @user_passes_test(CO_check, login_url='login', redirect_field_name=None)
