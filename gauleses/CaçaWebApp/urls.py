@@ -55,5 +55,12 @@ urlpatterns = [
 
     #Extra 
     path("cinema", TemplateView.as_view(template_name='comum/cinema.html'), name="cinema"),
+    path("negansmith", TemplateView.as_view(template_name='comum/negansmith.html'), name="negansmith"),
+    path("littlerock", TemplateView.as_view(template_name='comum/littlerock.html'), name="littlerock"),
+    path("albertwesker", TemplateView.as_view(template_name='comum/albertwesker.html'), name="albertwesker"),
+    path("edwardrichtofen", TemplateView.as_view(template_name='comum/edwardrichtofen.html'), name="edwardrichtofen"),
+    path("drzomboss", TemplateView.as_view(template_name='comum/drzomboss.html'), name="drzomboss"),
+    path("gerrylane", TemplateView.as_view(template_name='comum/gerrylane.html'), name="gerrylane"),
+    path("ACTCACCCTTGCGGTGTTTCGTTGGTGTCCACAGAGTAAG", TemplateView.as_view(template_name='comum/ACTCACCCTTGCGGTGTTTCGTTGGTGTCCACAGAGTAAG.html'), name="ACTCACCCTTGCGGTGTTTCGTTGGTGTCCACAGAGTAAG"),
 
 ] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
