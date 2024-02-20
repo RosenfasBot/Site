@@ -209,10 +209,12 @@ def carregar_pistas(request):
         return render(request, './pistas/pistasCRUD/carregarPistasForm.html')
 
     url = request.POST['link']
+    print(url)
     gcId, sheetId = re.findall(r'\/d\/(.+)\/.+gid=(.+)', url)[0]
 
     try:
         gc = gspread.service_account(filename='mmc-2023-920e16e15c52.json')
+        print(type(gc))
     except Exception as e:
         print(e)
         return render(request, './pistas/pistasCRUD/carregarPistasResponse.html', context={'erro':"Erro ao acessar arquivo de credenciais"})
