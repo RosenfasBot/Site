@@ -50,17 +50,17 @@ class Fila(SingletonModel):
             if not pista:
                 print("----------------------not p1----------------------")
                 # P2 não plantadas e disponiveis 
-                p2 = pistas_livres.filter(caminhos_possiveis__in=[caminho], usuarios_possiveis__in=[caminho.CA_ativo]).first()
+                p2 = pistas_livres.filter(caminho__isnull=True, caminhos_possiveis__in=[caminho], usuarios_possiveis__in=[caminho.CA_ativo]).first()
                 pista = p2
                 if not pista: 
                     print("----------------------not p2----------------------")            
                     # P3 plantada e não disponivel
-                    p3 = pistas_livres.filter(status='plantada').first()
+                    p3 = pistas_livres.filter(caminho__isnull=True,status='plantada').first()
                     pista = p3
                     if not pista:
                         print("----------------------not p3---------------------------------")             
                         # P4 plantada e não disponivel
-                        p4 = pistas_livres.first()
+                        p4 = pistas_livres.filter(caminho__isnull=True).first()
                         pista = p4
         return pista
 
