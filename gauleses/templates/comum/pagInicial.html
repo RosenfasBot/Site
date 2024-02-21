@@ -3,133 +3,116 @@
 {% block content %}
 {% include "navbarMain.html" %}
 
-<style>
-:root {
-  --smaller: .75;
-}
+<div class="section font-normal">
+  <div class="background-video w-background-video w-background-video-atom" data-poster-url="./static/images/video.png" data-autoplay="true" data-loop="true" data-wf-ignore="true" id="Hero">
+      <video autoplay="" loop="" style="background-image:url(&quot;./static/images/video.png&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+          <source src="./static/images/video.mp4" data-wf-ignore="true">
+          <source src="./static/images/video.png" data-wf-ignore="true">
+      </video>
+      <div class="container h-100 d-flex flex-column justify-content-center align-items-center">
+       <img src='./images/logo-vertical.png' class="logo-grande">
+      </div>
+  </div> 
+</div>
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-
-.containeraniversario {
-  color: #ff7300;
-  margin: 0 auto;
-  text-align: center;
-}
-
-
-.aniversario-list {
-  display: inline-block;
-  font-size: 1.5em;
-  list-style-type: none;
-  padding: 1em;
-  text-transform: uppercase;
-}
-
-li span {
-  display: block;
-  font-size: 4.5rem;
-}
-
-.emoji {
-  display: none;
-  padding: 1rem;
-}
-
-.emoji span {
-  font-size: 4rem;
-  padding: 0 .5rem;
-}
-</style>
-
-
-<script>
-(function () {
-    const second = 1000,
-          minute = second * 60,
-          hour = minute * 60,
-          day = hour * 24;
-  
-    //I'm adding this section so I don't have to keep updating this pen every year :-)
-    //remove this if you don't need it
-    let today = new Date(),
-        dd = String(today.getDate()).padStart(2, "0"),
-        mm = String(today.getMonth() + 1).padStart(2, "0"),
-        yyyy = today.getFullYear(),
-        nextYear = yyyy + 1,
-        dayMonth = "12/02/",
-        birthday = dayMonth + yyyy;
-    
-    today = mm + "/" + dd + "/" + yyyy;
-    if (today > birthday) {
-      birthday = dayMonth + nextYear;
-    }
-    //end
-    
-    const countDown = new Date(birthday).getTime(),
-        x = setInterval(function() {    
-  
-          const now = new Date().getTime(),
-                distance = countDown - now + 50400000;
-  
-          document.getElementById("days").innerText = Math.floor(distance / (day)),
-            document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
-            document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
-            document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
-  
-          //do something later when date is reached
-          if (distance < 0) {
-            document.getElementById("headline").innerText = "COMEÇOU O MINI CAÇA!!!";
-            document.getElementById("countdown").style.display = "none";
-            document.getElementById("content").style.display = "block";
-            clearInterval(x);
-          }
-          //seconds
-        }, 0)
-    }());
-</script>
-
-<div class="containeraniversario">
-    <h1 id="headline">O Mega Mini Caça começa em:</h1>
-    <div id="countdown">
-      <ul>
-        <li class="aniversario-list"><span id="days"></span>Dias</li>
-        <li class="aniversario-list"><span id="hours"></span>Horas</li>
-        <li class="aniversario-list"><span id="minutes"></span>Minutos</li>
-        <li class="aniversario-list"><span id="seconds"></span>Segundos</li>
-      </ul>
-    </div>
-    <div id="content" class="emoji">
-      <span>🥳</span>
-      <span>🎉</span>
-      <span>🔎</span>
-    </div>
+<div id="Overview" class="section bg-black wf-section font-normal">
+<div class="container p-top p-bot d-flex flex-column justify-content-center align-items-center">
+   <h1 style="opacity: 1;" class="display-2 large-heading">A MAGIA ANCESTRAL TE AGUARDA</h1>
+</div>  
+<div class="container p-bot">
+      <div style="opacity: 1;" class="w-layout-grid grid-thirds icon-grid-thirds text-white">
+          <div class="text-center">
+              <div class="centered-in-parent space-bottom icon-extra-large">
+                  <div class="icon-decoration-container"><img src='./static/images/8bruxas.png' alt="" class="icon-extra-large">
+                  </div>
+              </div>
+              <div class="content-width-small">Grandes bruxas disputam o poder e a busca pela sobrevivência.
+               <!-- <br>
+               Você consegue sobreviver à inquisição?                      -->
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="centered-in-parent space-bottom icon-extra-large">
+                  <div class="icon-decoration-container"><img src='./static/images/3semanas.png' alt="" class="icon-extra-large">
+                  </div>
+              </div>
+              <div class="content-width-small">O grande torneio já tem data de início. Preparem as suas tochas!
+              </div>
+          </div>
+          <div class="text-center">
+              <img src='./static/images/desafios.png' alt="" class="icon-extra-large space-bottom">
+              <div class="content-width-small">Concentrem suas forças e preparem-se para essa temida aventura!</div>
+          </div>
+      </div>
   </div>
+</div>
 
+<div id="Gameplay" class="section bg-paper font-normal">
+<div class="container p-top p-bot d-flex flex-column justify-content-center align-items-center">
+   <h1 style="opacity: 1;" class="display-2 large-heading">PREPARE-SE PARA O JULGAMENTO</h1>
+</div>
+  <div class="container p-bot d-flex flex-column justify-content-center align-items-center">
+     <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="w-tabs">
+        <div style="opacity: 1;" class="tabs-center w-tab-menu" role="tablist">
+           <a data-w-tab="Tab 1" class="text-tab w-inline-block w-tab-link w--current" id="w-tabs-1-data-w-tab-0" href="#w-tabs-1-data-w-pane-0" role="tab" aria-controls="w-tabs-1-data-w-pane-0" aria-selected="true">
+              <div class="text-block"><strong class="bold-text">A Lista</strong></div>
+           </a>
+           <a data-w-tab="Tab 2" class="text-tab w-inline-block w-tab-link" tabindex="-1" id="w-tabs-1-data-w-tab-1" href="#w-tabs-1-data-w-pane-1" role="tab" aria-controls="w-tabs-1-data-w-pane-1" aria-selected="false">
+              <div class="text-block"><strong class="bold-text">As Provas</strong></div>
+           </a>
+           <a data-w-tab="Tab 3" class="text-tab no-bottom-space w-inline-block w-tab-link" tabindex="-1" id="w-tabs-1-data-w-tab-2" href="#w-tabs-1-data-w-pane-2" role="tab" aria-controls="w-tabs-1-data-w-pane-2" aria-selected="false">
+              <div class="text-block"><strong class="bold-text">O Caça</strong></div>
+           </a>
+        </div>
+        <div class="w-tab-content">
+           <div data-w-tab="Tab 1" style="opacity: 1;" class="w-tab-pane w--tab-active" id="w-tabs-1-data-w-pane-0" role="tabpanel" aria-labelledby="w-tabs-1-data-w-tab-0">
+              <div class="w-layout-grid split-section align-center">
+                 <div id="w-node-fea5164d-3d23-fff1-1e24-dd4726b27c8c-94e512c6" class="content-width-medium">
+                     <p style="text-indent: 20px;" class='justificado'>A Lista, repleta de enigmas e desafios mágicos, é a chave para a glória na edição deste ano do Integrapoli. Cada item desta Lista encantada é um convite para explorar os recantos mais sombrios, desafiando seu povo a demonstrar habilidades dignas de feiticeiros.</p>
+                     <p style="text-indent: 20px;" class='justificado'>Entre as tarefas, vislumbra-se a arte de se transformar em bruxas e bruxos extraordinários, com trajes que refletem o esplendor da magia. A produção de vídeos também está no centro do desafio, permitindo que sua criatividade desabroche em meio a poções e feitiços. Construir cenários misteriosos e artefatos encantados também será parte integrante do caminho para a vitória.</p>
+                 </div>
+                 <img width="494" sizes="(max-width: 479px) 95vw, (max-width: 767px) 89vw, (max-width: 991px) 494px, (max-width: 1919px) 46vw, 494px" src='./static/images/lista.png' alt="" class="content-width-medium">
+              </div>
+           </div>
+           <div data-w-tab="Tab 2" class="w-tab-pane" id="w-tabs-1-data-w-pane-1" role="tabpanel" aria-labelledby="w-tabs-1-data-w-tab-1">
+              <div class="w-layout-grid split-section align-center">
+                 <div id="w-node-fea5164d-3d23-fff1-1e24-dd4726b27c97-94e512c6" class="content-width-medium">
+                         <p style="text-indent: 20px;" class='justificado'>As Provas deste ano irão além das habilidades convencionais, transformando seu povo em verdadeiros magos do entretenimento. Na dança, cada passo se tornará um feitiço, encantando a audiência e conquistando preciosos pontos.</p>
+                         <p style="text-indent: 20px;" class='justificado'>A determinação atingirá novos patamares, desafiando a resistência dos competidores em um banquete mágico. Poções e elixires especiais serão preparados, testando não apenas o paladar, mas também a coragem diante de misturas encantadas.</p>
+                         <p style="text-indent: 20px;" class='justificado'>Preparem-se para surpresas! Aqueles que conjurarem a magia do momento terão vantagem, ganhando a admiração de todos.</p>
+                 </div>
+                 <img width="494" sizes="(max-width: 479px) 95vw, (max-width: 767px) 89vw, (max-width: 991px) 494px, (max-width: 1919px) 46vw, 494px" src='./static/images/provas.png' alt="" class="content-width-medium">
+              </div>
+           </div>
+           <div data-w-tab="Tab 3" class="w-tab-pane" id="w-tabs-1-data-w-pane-2" role="tabpanel" aria-labelledby="w-tabs-1-data-w-tab-2">
+              <div class="w-layout-grid split-section align-center">
+                 <div id="w-node-fea5164d-3d23-fff1-1e24-dd4726b27ca2-94e512c6" class="content-width-medium align-self-center">
+                          <p style="text-indent: 20px;" class='justificado'>Uma odisseia que desafia não apenas a força física, mas também a perspicácia encantada dos bruxos mais ousados. As trilhas que conduzem à salvação não serão simples de percorrer, assim como os desafios mágicos que se revelarão ao longo dessa jornada feérica.</p>
+                          <p style="text-indent: 20px;" class='justificado'>Apenas os verdadeiramente puros poderão alcançar o desfecho mágico e serem recompensados com o fim aguardado, fruto de sua maestria nas artes encantadas e da capacidade de superar desafios extraordinários.</p>
+                          <!-- É pavê, ou painspecioná? -->
+                   </div>
+                 <img width="494" sizes="(max-width: 479px) 95vw, (max-width: 767px) 89vw, (max-width: 991px) 494px, (max-width: 1919px) 46vw, 494px" src='./static/images/caca.png' alt="" class="content-width-medium">
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
 
-
-<!--  <img main src="static/images/divulgacao.jpg" alt="Description of the image"> -->
-
-<style>
-    .imagemhomepage {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 110vh;
-        margin: 0;
-    }
-
-    .responsive {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-<div class="imagemhomepage">
-    <img src="static/images/divulgacao.jpg" alt="Nature" class="responsive">
+<div id="Connect" class="section wf-section p-top p-bot" data-gtm-vis-first-on-screen-33669515_23="6702" data-gtm-vis-total-visible-time-33669515_23="500" data-gtm-vis-has-fired-33669515_23="1">
+ <div class="container">
+    <div>
+       <div class="section-title text-white text-center">
+          <div style="opacity: 1;" class="center-image space-bottom mb-5"><img src="./static/images/pentagrama.png" loading="lazy" height="125" alt=""></div>
+          
+          <h3 style="opacity: 1;" class="large-heading">ENTRE EM CONTATO CONOSCO</h3>
+          <div style="opacity: 1;" class="mt-5 row row-justify-center">
+             <a href="https://www.instagram.com/integrapoli/" target="_blank" class="button button-large w-button b-social"><i class="fab fa-instagram" style='font-size: 20px;'></i>&nbsp;&nbsp;@integrapoli</a>
+             <a href="/cdn-cgi/l/email-protection#c0a3afeea9aeb4a5a7b2a1b0afaca9eef2f0f2f480a7ada1a9aceea3afad" target="_blank" class="button button-large w-button b-social"><i class="fa fa-envelope" style='font-size: 20px;'></i>&nbsp;&nbsp;<span class="__cf_email__" data-cfemail="dbb8b4f5b2b5afbebca9baabb4b7b2f5e9ebe9ef9bbcb6bab2b7f5b8b4b6">[email&#160;protected]</span></a>
+          </div>
+       </div>
+    </div>
+ </div>
 </div>
 
 {% endblock %}
